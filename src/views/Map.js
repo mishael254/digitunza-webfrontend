@@ -1,20 +1,3 @@
-/*!
-
-=========================================================
-* Black Dashboard React v1.2.2
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/black-dashboard-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/black-dashboard-react/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 import React from "react";
 
 // reactstrap components
@@ -23,13 +6,14 @@ import { Card, CardHeader, CardBody, Row, Col } from "reactstrap";
 const MapWrapper = () => {
   const mapRef = React.useRef(null);
   React.useEffect(() => {
-    let google = window.google;
-    let map = mapRef.current;
-    let lat = "40.748817";
-    let lng = "-73.985428";
-    const myLatlng = new google.maps.LatLng(lat, lng);
-    const mapOptions = {
-      scrollwheel: false, //we disable de scroll over the map, it is a really annoing when you scroll through page
+    const google = window.google;
+    if(!google){
+      console.error("Google maps API not loaded.");
+      return;
+    }
+    const map = new google.maps.Map(mapRef.current,{
+      center:{lat:0.0236, lng:37.9062},
+      zoom: 14,
       styles: [
         {
           elementType: "geometry",
@@ -272,30 +256,26 @@ const MapWrapper = () => {
           ],
         },
       ],
-    };
+    }
 
-    map = new google.maps.Map(map, mapOptions);
-
+    );
     const marker = new google.maps.Marker({
-      position: myLatlng,
-      map: map,
+      position: { lat: 0.43, lng: 37.08 },
+      map,
       animation: google.maps.Animation.DROP,
-      title: "BLK Design System PRO React!",
+      title: "Your Marker Title",
     });
-
-    const contentString =
-      '<div class="info-window-content"><h2>BLK Dashboard React</h2>' +
-      "<p>A freebie Admin for ReactStrap, Bootstrap, React, and React Hooks.</p></div>";
 
     const infowindow = new google.maps.InfoWindow({
-      content: contentString,
+      content: "Your Info Window Content",
     });
 
-    google.maps.event.addListener(marker, "click", function () {
+    marker.addListener("click", () => {
       infowindow.open(map, marker);
     });
   }, []);
-  return <div ref={mapRef} />;
+
+  return <div ref={mapRef} style={{ height: "500px" }} />;
 };
 
 function Map() {

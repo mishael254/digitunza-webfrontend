@@ -261,10 +261,10 @@ let chartExample3 = {
     gradientStroke.addColorStop(0, "rgba(119,52,169,0)"); //purple colors
 
     return {
-      labels: ["USA", "GER", "AUS", "UK", "RO", "BR"],
+      labels: ["Kiambu", "Meru", "Laikipia", "Kirinyaga", "Nakuru", "Turkana"],
       datasets: [
         {
-          label: "Countries",
+          label: "County",
           fill: true,
           backgroundColor: gradientStroke,
           hoverBackgroundColor: gradientStroke,
