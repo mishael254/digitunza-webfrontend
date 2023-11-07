@@ -134,3 +134,7 @@
 .offline-doc .page-header:before {
   background-color: rgba(0, 0, 0, 0.8);
 }
+.clickable-card:hover{
+  background-color: aqua;
+  cursor: pointer;
+}

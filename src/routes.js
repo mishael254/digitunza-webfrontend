@@ -7,6 +7,7 @@ import Typography from "views/Typography.js";
 import UserProfile from "views/UserProfile.js";
 import Projects from "views/Projects";
 
+
 var routes = [
   {
     path: "/dashboard",
@@ -36,6 +37,7 @@ var routes = [
     component: <Notifications />,
     layout: "/admin",
   },
+  
   {
     path: "/user-profile",
     name: "User Profile",
