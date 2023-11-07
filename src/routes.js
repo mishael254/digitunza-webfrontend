@@ -18,7 +18,7 @@ var routes = [
   {
     path: "/projects",
     name: "Projects",
-    icon: "tim-icons icon-atom",
+    icon: "tim-icons icon-app",
     component: <Projects />,
     layout: "/admin",
   },
