@@ -16,7 +16,7 @@ var routes = [
     layout: "/admin",
   },
   {
-    path: "/icons",
+    path: "/projects",
     name: "Projects",
     icon: "tim-icons icon-atom",
     component: <Projects />,
@@ -46,7 +46,6 @@ var routes = [
   {
     path: "/tables",
     name: "Table List",
-    rtlName: "قائمة الجدول",
     icon: "tim-icons icon-puzzle-10",
     component: <TableList />,
     layout: "/admin",

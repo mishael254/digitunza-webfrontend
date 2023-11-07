@@ -4092,7 +4092,7 @@ input[type="button"].btn-block {
   ~ .custom-control-label::before {
   border-color: #e14eca;
   background-color: #e14eca;
-  box-shadow: ;
+  box-shadow:aqua;
 }
 
 .custom-checkbox
