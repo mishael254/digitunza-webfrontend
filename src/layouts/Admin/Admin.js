@@ -28,7 +28,7 @@ import FixedPlugin from "components/FixedPlugin/FixedPlugin.js";
 
 import routes from "routes.js";
 
-import logo from "assets/img/react-logo.png";
+import logo from "assets/img/cbcc.png";
 import { BackgroundColorContext } from "contexts/BackgroundColorContext";
 
 var ps;
@@ -105,8 +105,8 @@ function Admin(props) {
             <Sidebar
               routes={routes}
               logo={{
-                outterLink: "https://www.creative-tim.com/",
-                text: "Creative Tim",
+                outterLink: "https://centreforbcc.com/about-us/",
+                text: "CBCC-DIGISOMO",
                 imgSrc: logo,
               }}
               toggleSidebar={toggleSidebar}
