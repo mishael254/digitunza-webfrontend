@@ -138,3 +138,14 @@
   background-color: aqua;
   cursor: pointer;
 }
+.active-nav-item {
+  background-color: rgb(31, 29, 31);
+  color: whitesmoke;
+}
+.card-header .col-md-4 {
+  display: flex;
+  justify-content: flex-end;
+}
+.btn-primary {
+  margin-left: auto;
+}

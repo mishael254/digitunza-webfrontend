@@ -1,8 +1,7 @@
 import React from "react";
-import { useParams } from "react-router-dom";
-
+import { useParams, Link } from "react-router-dom";
 // reactstrap components
-import { Card, CardHeader, CardBody, CardTitle, Row, Col } from "reactstrap";
+import { Card, CardHeader, CardBody, CardTitle, Row, Col,Button } from "reactstrap";
 
 function Projectdetails() {
   const {id} = useParams();
@@ -26,12 +25,16 @@ function Projectdetails() {
           <Col md="5">
           <Card>
               <CardHeader className="mb-5">
+                
                 <h5 className="card-category">Black Table Heading 2</h5>
                 <CardTitle tag="h3">
                   Total users in Project.. {id}
                 </CardTitle>
+                
+                
               </CardHeader>
               <CardBody>
+                
                 
               </CardBody>
             </Card>
@@ -77,6 +80,10 @@ function Projectdetails() {
               </CardBody>
             </Card>
             </Col>
+          
+            <Col md="4">
+            <Link to="/admin/projects"><Button block color="primary">Go back</Button></Link>
+            </Col>   
         </Row>
       </div>
     </>
