@@ -13,9 +13,9 @@ function Projectdetails() {
           <Col md="12">
             <Card>
               <CardHeader className="mb-5">
-                <h5 className="card-category">Black Table Heading</h5>
+                <h5 className="card-category">Black Table Heading 1 </h5>
                 <CardTitle tag="h3">
-                  Projectdetails for Project {id}
+                  Project details for {id}
                 </CardTitle>
               </CardHeader>
               <CardBody>
@@ -23,6 +23,60 @@ function Projectdetails() {
               </CardBody>
             </Card>
           </Col>
+          <Col md="5">
+          <Card>
+              <CardHeader className="mb-5">
+                <h5 className="card-category">Black Table Heading 2</h5>
+                <CardTitle tag="h3">
+                  Total users in Project.. {id}
+                </CardTitle>
+              </CardHeader>
+              <CardBody>
+                
+              </CardBody>
+            </Card>
+          </Col>
+            <Col md="6">
+            <Card>
+              <CardHeader className="mb-5">
+                <h5 className="card-category">Black Table Heading 3</h5>
+                <CardTitle tag="h3">
+                  No of groups in Project.. {id}
+                </CardTitle>
+              </CardHeader>
+              <CardBody>
+                
+              </CardBody>
+            </Card>
+            </Col>
+            
+            <Col md="12">
+            <Card>
+              <CardHeader className="mb-5">
+                <h5 className="card-category">Black Table Heading 4</h5>
+                <CardTitle tag="h3">
+                 No of Playlist deployed for project {id}
+                </CardTitle>
+              </CardHeader>
+              <CardBody>
+                
+              </CardBody>
+            </Card>
+            </Col>
+            
+            <Col md="12">
+            <Card>
+              <CardHeader className="mb-5">
+                <h5 className="card-category">Black Table Heading 5</h5>
+                <CardTitle tag="h3">
+                  Time duration for Project {id}
+                </CardTitle>
+              </CardHeader>
+              <CardBody>
+                
+              </CardBody>
+            </Card>
+            </Col>
         </Row>
       </div>
     </>
