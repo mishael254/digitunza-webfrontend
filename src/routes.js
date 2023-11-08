@@ -6,6 +6,7 @@ import TableList from "views/TableList.js";
 import Typography from "views/Typography.js";
 import UserProfile from "views/UserProfile.js";
 import Projects from "views/Projects";
+import Projectdetails from "views/Projectdetails";
 
 
 var routes = [
@@ -21,6 +22,13 @@ var routes = [
     name: "Projects",
     icon: "tim-icons icon-app",
     component: <Projects />,
+    layout: "/admin",
+  },
+  {
+    path: "/projects-details",
+    name: "Projects-details",
+    icon: "tim-icons icon-globe-2",
+    component: <Projectdetails />,
     layout: "/admin",
   },
   {

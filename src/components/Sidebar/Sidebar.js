@@ -19,10 +19,11 @@ var ps;
 function Sidebar(props) {
   const location = useLocation();
   const sidebarRef = React.useRef(null);
-  // verifies if routeName is the one active (in browser input)
+
   const activeRoute = (routeName) => {
     return location.pathname === routeName ? "active" : "";
   };
+
   React.useEffect(() => {
     if (navigator.platform.indexOf("Win") > -1) {
       ps = new PerfectScrollbar(sidebarRef.current, {
@@ -30,17 +31,19 @@ function Sidebar(props) {
         suppressScrollY: false,
       });
     }
-    // Specify how to clean up after this effect:
+
     return function cleanup() {
       if (navigator.platform.indexOf("Win") > -1) {
         ps.destroy();
       }
     };
   });
-  
+
   const { routes, rtlActive, logo } = props;
+
   let logoImg = null;
   let logoText = null;
+
   if (logo !== undefined) {
     if (logo.outterLink !== undefined) {
       logoImg = (
@@ -90,6 +93,7 @@ function Sidebar(props) {
       );
     }
   }
+
   return (
     <BackgroundColorContext.Consumer>
       {({ color }) => (
@@ -103,7 +107,11 @@ function Sidebar(props) {
             ) : null}
             <Nav>
               {routes.map((prop, key) => {
-                if (prop.redirect) return null;
+                //adding routes that i dont want them to be rendered in the sidebar
+                const excludedRoutes = ["/projects-details",];
+                if (prop.redirect ||excludedRoutes.includes(prop.path)) {
+                  return null; // Exclude ProjectDetails route and additional routes that you dont want them to be rendered by the sidebar
+                }
                 return (
                   <li
                     className={
@@ -122,7 +130,6 @@ function Sidebar(props) {
                   </li>
                 );
               })}
-              
             </Nav>
           </div>
         </div>
