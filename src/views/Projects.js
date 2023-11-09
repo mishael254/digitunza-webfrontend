@@ -13,7 +13,7 @@ function Projects() {
       <Row className="justify-content-end">
 
         <Col md="4" className="d-flex justify-content-end">
-                    <Link to="/admin/projects"><Button block color="primary">+ Create Project</Button></Link>
+                    <Link to="/admin/create-project"><Button block color="primary">+ Create Project</Button></Link>
         </Col>
 
       </Row>

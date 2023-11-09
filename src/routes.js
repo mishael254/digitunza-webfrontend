@@ -7,6 +7,7 @@ import Typography from "views/Typography.js";
 import UserProfile from "views/UserProfile.js";
 import Projects from "views/Projects";
 import Projectdetails from "views/Projectdetails";
+import Createproject from "views/Createproject";
 
 
 var routes = [
@@ -65,6 +66,13 @@ var routes = [
     name: "Typography",
     icon: "tim-icons icon-align-center",
     component: <Typography />,
+    layout: "/admin",
+  },
+  {
+    path: "/create-project",
+    name: "Create project",
+    icon: "tim-icons icon-tap-02",
+    component: <Createproject />,
     layout: "/admin",
   },
   
