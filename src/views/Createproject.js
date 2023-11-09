@@ -30,7 +30,7 @@ function Createproject() {
                 <CardTitle tag="h4">Create Project</CardTitle>
               </CardHeader>
               <CardBody>
-                <Table className="tablesorter" responsive>
+                <Table>
                   <div class="col-md-12">
                     <form id="RangeValidation" class="form-horizontal">
                       <div class="card">
@@ -130,7 +130,7 @@ function Createproject() {
                                 <div class="col-md-4">
                                   <div class="card">
                                     <div class="card-header">
-                                      <h4 class="card-title">Time Picker</h4>
+                                      <h4 class="card-title">Time</h4>
                                     </div>
                                     <div class="card-body">
                                       <div class="form-group">
@@ -151,80 +151,79 @@ function Createproject() {
                                 </div>
                         </div>
                         
-                        <div class="text-center card-footer">
-                          <button type="button" class="btn btn-primary">Validate Inputs</button>
-                        </div>
+                    
                       </div>
+                      <Table>
+                            <div class="col-md-12">
+                                
+                              <div class="card">
+                                <div class="card-header">
+                                  <h4 class="card-title">Playlist upload</h4>
+                                </div>
+                                <div class="card-body">
+                                <div class="row">
+                                  <label class="col-sm-2 col-form-label">Message title</label>
+                                    <div class="col-sm-7">
+                                      <div class="form-group">
+                                        <input name="required" type="text" class="form-control"></input>
+                                      </div>
+                                    </div>
+                                    <label class="label-on-right col-sm-3"><code>required</code></label>
+                                </div>
+                                <div class="row">
+                                    <label class="col-sm-2 col-form-label">Message topic</label>
+                                      <div class="col-sm-7">
+                                        <div class="form-group">
+                                          <input name="email" type="text" class="form-control"></input>
+                                        </div>
+                                      </div>
+                                      <label class="label-on-right col-sm-3"><code>type="text"</code></label>
+                                </div>
+                                <div class="row">
+                                    <label class="col-sm-2 col-form-label">Message subtopic</label>
+                                      <div class="col-sm-7">
+                                        <div class="form-group">
+                                          <input name="number" type="text" class="form-control"></input>
+                                        </div>
+                                      </div>
+                                      <label class="label-on-right col-sm-3"><code>type="text"</code></label>
+                                </div>
+                                <div class="row">
+                                  <label class="col-sm-2 col-form-label">Message duration</label>
+                                    <div class="col-sm-7">
+                                      <div class="form-group">
+                                        <input name="url" type="text" class="form-control"></input>
+                                      </div>
+                                    </div>
+                                    <label class="label-on-right col-sm-3"><code>type="url"</code></label>
+                                </div>
+                                <div class="row">
+                                  <div class="col-sm-4 col-md-4">
+                                    <h4 class="card-title">Regular Image</h4>
+                                      <div class="fileinput text-center">
+                                        <input type="file"></input>
+                                          <div class="thumbnail">
+                                            <img src="/black-dashboard-pro-react/static/media/image_placeholder.ae264cfc.jpg" alt="..."></img>
+                                          </div>
+                                          <div>
+                                            <button type="button" class="btn-round btn btn-default">Select image</button>
+                                          </div>
+                                      </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="text-center card-footer">
+                                <button type="button" class="btn btn-primary">Validate Inputs</button>
+                              </div>
+                            </div>
+                            
+                          </div>
+                        </Table>
                     </form>
                   </div>
               
                 </Table>
-                <Table>
-                  <div class="col-md-12">
-                    <form id="TypeValidation" class="form-horizontal">
-                      <div class="card">
-                        <div class="card-header">
-                          <h4 class="card-title">Type Validation</h4>
-                        </div>
-                      <div class="card-body">
-                      <div class="row">
-                        <label class="col-sm-2 col-form-label">Required Text</label>
-                        <div class="col-sm-7">
-                          <div class="form-group">
-                            <input name="required" type="text" class="form-control"></input>
-                          </div>
-                        </div>
-                        <label class="label-on-right col-sm-3"><code>required</code></label>
-                      </div>
-                      <div class="row">
-                        <label class="col-sm-2 col-form-label">Email</label>
-                        <div class="col-sm-7">
-                          <div class="form-group">
-                            <input name="email" type="text" class="form-control"></input>
-                          </div>
-                        </div>
-                        <label class="label-on-right col-sm-3"><code>type="email"</code></label>
-                      </div>
-                      <div class="row">
-                        <label class="col-sm-2 col-form-label">Number</label>
-                        <div class="col-sm-7">
-                          <div class="form-group">
-                            <input name="number" type="text" class="form-control"></input>
-                          </div>
-                        </div>
-                        <label class="label-on-right col-sm-3"><code>type="number"</code></label>
-                      </div>
-                      <div class="row">
-                        <label class="col-sm-2 col-form-label">Url</label>
-                        <div class="col-sm-7">
-                          <div class="form-group">
-                            <input name="url" type="text" class="form-control"></input>
-                          </div>
-                        </div>
-                        <label class="label-on-right col-sm-3"><code>type="url"</code></label>
-                      </div>
-                      <div class="row">
-                        <label class="col-sm-2 col-form-label">Equal to</label>
-                        <div class="col-sm-3">
-                          <div class="form-group">
-                            <input id="idSource" placeholder="#idSource" type="text" class="form-control"></input>
-                          </div>
-                        </div>
-                        <div class="col-sm-3">
-                          <div class="form-group">
-                            <input id="idDestination" placeholder="#idDestination" type="text" class="form-control"></input>
-                          </div>
-                        </div>
-                        <label class="label-on-right col-sm-4"><code>equalTo="#idSource"</code></label>
-                      </div>
-                    </div>
-                    <div class="text-center card-footer">
-                      <button type="button" class="btn btn-primary">Validate Inputs</button>
-                    </div>
-                  </div>
-                </form>
-              </div>
-              </Table>
+                
               </CardBody>
             </Card>
           </Col>
@@ -235,7 +234,7 @@ function Createproject() {
                 <p className="category">Videos , audio, Thumbnail</p>
               </CardHeader>
               <CardBody>
-              <Table className="tablesorter" responsive>
+              <Table>
                   <thead className="text-primary">
                     <tr>
                       <th>Name</th>
