@@ -149,3 +149,57 @@
 .btn-primary {
   margin-left: auto;
 }
+/* Date Picker Styles */
+.rdt {
+  position: relative;
+}
+.rdtPicker {
+  position: absolute;
+  width: 240px;
+  border: 1px solid var(--lighter);
+  background-color: var(--white);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+.rdt {
+  position: relative;
+}
+
+.rdtPicker {
+  position: absolute;
+  width: 250px;
+  border: 1px solid var(--lighter);
+  background-color: var(--white);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  top: 100%; /* Position it below the input */
+}
+.rdt.open .rdtPicker {
+  display: block;
+}
+
+/* Time Picker Styles */
+.rdtTime {
+  display: flex;
+  justify-content: center;
+}
+
+.rdtCounters {
+  display: flex;
+}
+
+.rdtCounter {
+  text-align: center;
+  margin: 0 10px;
+}
+
+.rdtCounterSeparator {
+  font-size: 1.2rem;
+  margin: 0 5px;
+}
+
+.rdtBtn {
+  cursor: pointer;
+  font-size: 1.2rem;
+  margin-top: 3px;
+}
