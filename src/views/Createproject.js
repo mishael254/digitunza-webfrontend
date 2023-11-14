@@ -83,72 +83,40 @@ function Createproject() {
                             </div>
                             <label class="label-on-right col-sm-3"><code>max="6"</code></label>
                           </div>
-                          
                           <div class="row">
-                            <div class="col-md-4">
-                              <div class="card">
-                                <div class="card-header">
-                                  <h4 class="card-title">Start date</h4>
-                                </div>
-                                <div class="card-body">
-                                  <div class="form-group">
-                                    <div class="rdt">
-                                      
-                                        <div class="rdtPicker">
-                                          <div class="rdtDays">
-                                            <table>
-                                              <DatePicker class="form-control" onChange={onChange} />
-                                            </table>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
+                            <label class="col-sm-2 col-form-label">Group name</label>
+                            <div class="col-sm-7">
+                              <div class="form-group">
+                                <input name="max" type="text" class="form-control"></input>
                               </div>
-                              <div class="col-md-4">
-                                <div class="card">
-                                  <div class="card-header">
-                                    <h4 class="card-title">End date</h4>
-                                  </div>
-                                  <div class="card-body">
-                                    <div class="form-group">
-                                      <div class="rdt">
-                                      
-                                          <div class="rdtPicker">
-                                            <div class="rdtDays">
-                                              <table>
-                                              <DatePicker class="form-control" onChange={onChange} />
-                                              </table>
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="col-md-4">
-                                  <div class="card">
-                                    <div class="card-header">
-                                      <h4 class="card-title">Time</h4>
-                                    </div>
-                                    <div class="card-body">
-                                      <div class="form-group">
-                                        <div class="rdt">
-                                          <input type="text" class="form-control" placeholder="Time Picker Here" value={currTime}></input>
-                                            <div class="rdtPicker">
-                                              <div class="rdtTime">
-                                                <table>
-                                                  
-                                                </table>
-                                              </div>
-                                            </div>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
+                            </div>
+                            <label class="label-on-right col-sm-3"><code>max="6"</code></label>
+                          </div>
+                          
+                         
+                            <div class="row">
+                            <label class="col-sm-2 col-form-label">Group name</label>
+                            <div class="col-sm-7">
+                              <div class="form-group">
+                                <input name="max" type="text" class="form-control"></input>
+                              </div>
+                            </div>
+                            <label class="label-on-right col-sm-3"><code>max="6"</code></label>
+                          </div>
+                          <div class="row">
+                          <label class="col-sm-2 col-form-label">Group number</label>
+                          <div class="col-md-7">
+                            <div class="input-group">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                  <i class="tim-icons icon-mobile"></i>
+                                </span>
+                              </div>
+                              <input name="number" placeholder="Group no..." type="number" class="form-control"></input>
+                            </div>
+                          </div>
+                        </div>
+                               
                         </div>
                         
                     
@@ -197,31 +165,89 @@ function Createproject() {
                                     </div>
                                     <label class="label-on-right col-sm-3"><code>type="url"</code></label>
                                 </div>
-                                <div class="row">
-                                  <div class="col-sm-4 col-md-4">
-                                    <h4 class="card-title">Regular Image</h4>
-                                      <div class="fileinput text-center">
-                                        <input type="file"></input>
-                                          <div class="thumbnail">
-                                            <img src="/black-dashboard-pro-react/static/media/image_placeholder.ae264cfc.jpg" alt="..."></img>
-                                          </div>
-                                          <div>
-                                            <button type="button" class="btn-round btn btn-default">Select image</button>
-                                          </div>
-                                      </div>
-                                  </div>
-                                </div>
+                                
                               </div>
                               <div class="text-center card-footer">
-                                <button type="button" class="btn btn-primary">Validate Inputs</button>
                               </div>
                             </div>
                             
                           </div>
-                        </Table>
-                    </form>
+                      </Table>
+                   
+                  
+                      <div class="col-md-12">
+                                    
+                        <div class="card">
+                          <div class="card-header">
+                            <h4 class="card-title">Select project timelapse</h4>
+                          </div>
+                          <div class="row">
+                                <div class="col-md-4">
+                                  <div class="card">
+                                    <div class="card-header">
+                                      <h4 class="card-title">Start date</h4>
+                                    </div>
+                                    <div class="card-body">
+                                      <div class="form-group">
+                                        <div class="rdt">
+                                          
+                                            <div class="rdtPicker">
+                                              <div class="rdtDays">
+                                                <table>
+                                                  <DatePicker class="form-control" onChange={onChange} />
+                                                </table>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="col-md-4">
+                                    <div class="card">
+                                      <div class="card-header">
+                                        <h4 class="card-title">End date</h4>
+                                      </div>
+                                      <div class="card-body">
+                                        <div class="form-group">
+                                          <div class="rdt">
+                                          
+                                              <div class="rdtPicker">
+                                                <div class="rdtDays">
+                                                  <table>
+                                                  <DatePicker class="form-control" onChange={onChange} />
+                                                  </table>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                      <div class="card">
+                                        <div class="card-header">
+                                          <h4 class="card-title">Time</h4>
+                                        </div>
+                                        <div class="card-body">
+                                          <div class="form-group">
+                                            <div class="rdt">
+                                              <input type="text" class="form-control" placeholder="Time Picker Here" value={currTime}></input>
+                                                
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    </div>
+                                    </div>
+                      
+                                <div class="text-center card-footer">
+                                    <button type="button" class="btn btn-primary">Create</button>
+                                  </div>
+                  </form>
                   </div>
-              
                 </Table>
                 
               </CardBody>
