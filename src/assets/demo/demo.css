@@ -149,4 +149,45 @@
 .btn-primary {
   margin-left: auto;
 }
-/* Date Picker Styles */
+.custom-icon-container1 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px; /* Adjust the size of the container as needed */
+  height: 40px; /* Adjust the size of the container as needed */
+  background-color: rgba(255, 0, 234, 0.501); /* Set the background color to red */
+  border-radius: 30%; /* Create a round shape */
+}
+.custom-icon-container2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px; /* Adjust the size of the container as needed */
+  height: 40px; /* Adjust the size of the container as needed */
+  background-color: rgba(0, 183, 255, 0.501); /* Set the background color to red */
+  border-radius: 30%; /* Create a round shape */
+}
+.custom-icon-container3 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px; /* Adjust the size of the container as needed */
+  height: 40px; /* Adjust the size of the container as needed */
+  background-color: rgba(0, 255, 174, 0.501); /* Set the background color to red */
+  border-radius: 30%; /* Create a round shape */
+}
+.custom-icon-container4 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px; /* Adjust the size of the container as needed */
+  height: 40px; /* Adjust the size of the container as needed */
+  background-color: rgba(255, 34, 0, 0.501); /* Set the background color to red */
+  border-radius: 30%; /* Create a round shape */
+}
+
+.custom-icon {
+  font-size: 36px; /* Adjust the size of the icon as needed */
+  color: white; /* Set the color of the icon to white */
+}
+

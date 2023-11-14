@@ -122,6 +122,122 @@ function Dashboard(props) {
           </Col>
         </Row>
         <Row>
+        <div class="col-md-6 col-lg-3">
+          <div class="card-stats card">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-5">
+                  <div class="info-icon text-center icon-warning">
+                  <div class = "custom-icon-container1">
+                    <i class="tim-icons icon-chat-33 custom-icon"></i>
+                    </div>
+                  </div>
+                </div>
+              <div class="col-7">
+                <div class="numbers">
+                  <p class="card-category">Number</p>
+                  <h3 class="card-title">150GB</h3>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer">
+            
+            <div class="stats">
+              <i class="tim-icons icon-refresh-01"></i>
+               Update Now
+            </div>
+            
+          </div>
+        </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+          <div class="card-stats card">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-5">
+                  <div class="info-icon text-center icon-primary">
+                  <div class = "custom-icon-container2">
+                    <i class="tim-icons icon-shape-star custom-icon"></i>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-7">
+                  <div class="numbers">
+                    <p class="card-category">Followers</p>
+                    <h3 class="card-title">+45k</h3>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer">
+              <div class="stats">
+                <i class="tim-icons icon-sound-wave"></i>
+                 Last Research
+              </div>
+            </div>
+          </div>
+          </div>
+          <div class="col-md-6 col-lg-3">
+            <div class="card-stats card">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-5">
+                    <div class="info-icon text-center icon-success">
+                    <div class = "custom-icon-container3">
+                      <i class="tim-icons icon-single-02 custom-icon"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-7">
+                    <div class="numbers">
+                      <p class="card-category">Users</p>
+                      <h3 class="card-title">150,000</h3>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer">
+                
+                <div class="stats">
+                  <i class="tim-icons icon-trophy"></i>
+                   Customers feedback
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3">
+            <div class="card-stats card">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-5">
+                    <div class="info-icon text-center icon-danger">
+                      <div class = "custom-icon-container4">
+                      <i class="tim-icons icon-molecule-40 custom-icon"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-7">
+                    <div class="numbers">
+                      <p class="card-category">Errors</p>
+                      <h3 class="card-title">12</h3>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer">
+               
+                <div class="stats">
+                  <i class="tim-icons icon-watch-time"></i>
+                   In the last hours
+                </div>
+              </div>
+            </div>
+          </div>
+        </Row>
+        
+
+        <Row>
           <Col lg="4">
             <Card className="card-chart">
               <CardHeader>

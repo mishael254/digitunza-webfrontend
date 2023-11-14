@@ -1,6 +1,7 @@
 
-import React, {useState}from "react";
+import React, {useState, useRef}from "react";
 import { DatePicker } from "antd";
+import { Link } from "react-router-dom";
 
 // reactstrap components
 import {
@@ -11,9 +12,70 @@ import {
   Table,
   Row,
   Col,
+  Button,
+  
 } from "reactstrap";
 
 function Createproject() {
+  const [formData, setFormData] = useState({
+    projectName:'',
+    category:'',
+    country:'',
+    county:'',
+    countyZone:'',
+    groupName:'',
+    groupNumber:'',
+    messageTitle:'',
+    messageTopic:'',
+    messageSubtopic:'',
+    messageDuration:'',
+    startDate:'',
+    endDate:'',
+    time:'',
+  });
+  const handleFormChange = (e) => {
+    const {name,value} = e.target;
+    setFormData((prevData)=>({
+      [name]:value,
+    }));
+  };
+  const handleFormSubmit = ()=>{
+    fetch('your-api-endpoint', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    })
+      .then(response => response.json())
+      .then(data => {
+        // Handle the API response if needed
+        console.log(data);
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+
+  }
+  const [imageFile, setImageFile] = useState(null);
+  const[audioFile, setAudioFile] = useState(null);
+  const [videoFile, setVideoFile] = useState(null);
+  
+  const imageInputRef = useRef(null);
+  const videoInputRef = useRef(null);
+  const audioInputRef = useRef(null);
+
+  const handleFileChange = (e, setFile) => {
+    const file = e.target.files[0];
+    setFile(file);
+  }
+  const handleAddPhotoClick = (inputRef)=>{
+   inputRef.current.click();
+  }
+  const handleDeleteClick = (setFile) =>{
+    setFile(null);
+  }
+  
   
   const currTime = new Date().toLocaleTimeString();
   const [date, setDate] = useState(new Date());
@@ -92,17 +154,6 @@ function Createproject() {
                             </div>
                             <label class="label-on-right col-sm-3"><code>max="6"</code></label>
                           </div>
-                          
-                         
-                            <div class="row">
-                            <label class="col-sm-2 col-form-label">Group name</label>
-                            <div class="col-sm-7">
-                              <div class="form-group">
-                                <input name="max" type="text" class="form-control"></input>
-                              </div>
-                            </div>
-                            <label class="label-on-right col-sm-3"><code>max="6"</code></label>
-                          </div>
                           <div class="row">
                           <label class="col-sm-2 col-form-label">Group number</label>
                           <div class="col-md-7">
@@ -168,6 +219,69 @@ function Createproject() {
                                 
                               </div>
                               <div class="text-center card-footer">
+                                <div class = "row">
+                                  <div class="col-sm-4 col-md-3">
+                                    <div class = "card">
+                                      <h4 class="card-title">{imageFile? imageFile.name:'No Thumbnail selected'}</h4>
+                                        <div class="fileinput text-center">
+                                          <input type="file" ref={imageInputRef} style={{display:'none'}} onChange={(e)=>handleFileChange(e,setImageFile)}></input>
+                                            <div class="thumbnail img-circle">
+                                                {imageFile ?(
+                                                    <img src={URL.createObjectURL(imageFile)} alt="Selected" />
+                                                  ):(
+                                                    <img src="" alt="..." /> 
+                                              )}
+                                            </div>
+                                            <div>
+                                              <button type="button" class="btn-round btn btn-default" onClick={()=>handleAddPhotoClick(imageInputRef)}>Add thumbnail</button>
+                                              {imageFile&&(<button type="button" className="btn-round btn btn-danger" onClick={()=>handleDeleteClick(setImageFile)}>remove</button>
+                                              )}
+                                            </div>
+                                        </div>
+                                    </div>
+                                  </div>
+                                  <div class="col-sm-4 col-md-3">
+                                    
+                                    <div class = "card">
+                                      <h4 class="card-title">{audioFile? audioFile.name:'no audio file selected'}</h4>
+                                        <div class="fileinput text-center">
+                                          <input type="file" ref={audioInputRef} style={{display:'none'}} onChange={(e)=>handleFileChange(e,setAudioFile)}></input>
+                                            <div class="thumbnail img-circle">
+                                                {audioFile ?(
+                                                    <audio src={URL.createObjectURL(audioFile)} controls />
+                                                  ):(
+                                                    <audio src="" alt="..." /> 
+                                              )}
+                                            </div>
+                                            <div>
+                                              <button type="button" class="btn-round btn btn-default" onClick={()=>handleAddPhotoClick(audioInputRef)}>Add audio</button>
+                                              {audioFile&&(<button type="button" className="btn-round btn btn-danger" onClick={()=>handleDeleteClick(setAudioFile)}>remove</button>
+                                              )}
+                                            </div>
+                                        </div>
+                                    </div>
+                                  </div>
+                                  <div class="col-sm-4 col-md-3">
+                                    <div class = "card">
+                                      <h4 class="card-title">{videoFile? videoFile.name:'no video file'}</h4>
+                                        <div class="fileinput text-center">
+                                          <input type="file" ref={videoInputRef} style={{display:'none'}} onChange={(e)=>handleFileChange(e,setVideoFile)}></input>
+                                            <div class="thumbnail img-circle">
+                                                {videoFile ?(
+                                                    <video src={URL.createObjectURL(videoFile)} controls />
+                                                  ):(
+                                                    <video src="" alt="..." /> 
+                                              )}
+                                            </div>
+                                            <div>
+                                              <button type="button" class="btn-round btn btn-default" onClick={()=> handleAddPhotoClick(videoInputRef)}>Add video</button>
+                                              {videoFile&&(<button type="button" className="btn-round btn btn-danger" onClick={()=>handleDeleteClick(setVideoFile)}>remove</button>
+                                              )}
+                                            </div>
+                                        </div>
+                                    </div>
+                                  </div>
+                              </div>
                               </div>
                             </div>
                             
@@ -244,7 +358,7 @@ function Createproject() {
                                     </div>
                       
                                 <div class="text-center card-footer">
-                                    <button type="button" class="btn btn-primary">Create</button>
+                                    <button type="button" class="btn btn-primary"onClick={handleFormSubmit}>Create</button>
                                   </div>
                   </form>
                   </div>
@@ -314,6 +428,9 @@ function Createproject() {
                     </tr>
                   </tbody>
                 </Table>
+                <Col md="4">
+                  <Link to="/admin/projects"><Button block color="primary">Go back</Button></Link>
+                </Col>
               </CardBody>
             </Card>
           </Col>
