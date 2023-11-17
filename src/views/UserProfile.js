@@ -1,5 +1,5 @@
 
-import React from "react";
+import React, { useState } from "react";
 import Swal from "sweetalert2"
 // reactstrap components
 import {
@@ -18,6 +18,15 @@ import {
 import withReactContent from "sweetalert2-react-content";
 
 function UserProfile() {
+  const [userName,setUserName] = useState('');
+  const [userEmail,setUserEmail] = useState('');
+  const [firstName,setFirstName] = useState('');
+  const [lastName,setLastName] = useState('');
+  const [userAddress,setUserAddress] = useState('');
+  const [userCity,setUserCity] = useState('');
+  const [userCountry,setUserCountry] = useState('');
+  const [userPostalCode,setUserPostalCode] = useState('');
+  const [userAbout,setUserAbout] = useState('');
  const MySwal = withReactContent(Swal);
  const handleSaveProfileClick = () => {
   MySwal.fire({

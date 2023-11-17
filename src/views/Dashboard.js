@@ -1,9 +1,9 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // react plugin used to create charts
 import { Line, Bar } from "react-chartjs-2";
-
+import axios from "axios";
 // reactstrap components
 import {
   Button,
@@ -34,6 +34,14 @@ import {
 } from "variables/charts.js";
 
 function Dashboard(props) {
+  const [members, setMembers] = useState([]);
+
+    useEffect(() => {
+      axios.get('http://tathmini.live:8000/api/member/')
+        .then(response => setMembers(response.data))
+        .catch(error=> console.error('Error fetching users:',error));
+    },[]);
+
   const [bigChartData, setbigChartData] = React.useState("data1");
   const setBgChartData = (name) => {
     setbigChartData(name);
@@ -573,17 +581,20 @@ function Dashboard(props) {
                     <tr>
                       <th>Name</th>
                       <th>Country</th>
-                      <th>City</th>
-                      <th className="text-center">Salary</th>
+                      <th>Phone</th>
+                      <th className="text-center">Age</th>
                     </tr>
                   </thead>
-                  <tbody>
-                    <tr>
-                      <td>Dakota Rice</td>
-                      <td>Niger</td>
-                      <td>Oud-Turnhout</td>
-                      <td className="text-center">$36,738</td>
-                    </tr>
+                  <tbody>{members.map((member)=>(
+                    <tr key={member.id}>
+                    <td>{member.firstName}</td>
+                    <td>{member.country}</td>
+                    <td>{member.phone}</td>
+                    <td className="text-center">{member.age}</td>
+                  </tr>
+
+                  ))}
+                    
                     <tr>
                       <td>Minerva Hooper</td>
                       <td>Curaçao</td>
