@@ -1,22 +1,6 @@
-/*!
 
-=========================================================
-* Black Dashboard React v1.2.2
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/black-dashboard-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/black-dashboard-react/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 import React from "react";
-
+import Swal from "sweetalert2"
 // reactstrap components
 import {
   Button,
@@ -31,8 +15,27 @@ import {
   Row,
   Col,
 } from "reactstrap";
+import withReactContent from "sweetalert2-react-content";
 
 function UserProfile() {
+ const MySwal = withReactContent(Swal);
+ const handleSaveProfileClick = () => {
+  MySwal.fire({
+    title: "Do you want to save the changes?",
+    showDenyButton: true,
+    showCancelButton: true,
+    confirmButtonText: "Save",
+    denyButtonText: `Don't save`,
+  }).then((result) => {
+    if (result.isConfirmed) {
+      MySwal.fire("Saved!", "", "success");
+      // Additional logic for saving changes can be added here
+    } else if (result.isDenied) {
+      MySwal.fire("Changes are not saved", "", "info");
+    }
+  });
+};
+  
   return (
     <>
       <div className="content">
@@ -154,7 +157,7 @@ function UserProfile() {
                 </Form>
               </CardBody>
               <CardFooter>
-                <Button className="btn-fill" color="primary" type="submit">
+                <Button className="btn-fill" color="primary" type="submit" onClick={handleSaveProfileClick}>
                   Save
                 </Button>
               </CardFooter>
