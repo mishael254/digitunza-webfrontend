@@ -139,8 +139,12 @@ function Dashboard(props) {
                 </div>
               <div class="col-7">
                 <div class="numbers">
-                  <p class="card-category">Number</p>
-                  <h3 class="card-title">150GB</h3>
+                  <p class="card-category">Deployments done</p>
+                  {deployments.length > 0? (
+                    <h3 className="card-title">{deployments.length}</h3>
+                  ):(
+                    <p>0</p>
+                  )}
                 </div>
               </div>
             </div>
