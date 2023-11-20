@@ -1,9 +1,10 @@
+ // eslint-disable-next-line
 import React, {useState, useEffect} from "react";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // react plugin used to create charts
 import { Line, Bar } from "react-chartjs-2";
-import axios from "axios";
+
 // reactstrap components
 import {
   Button,
@@ -35,6 +36,7 @@ import {
 import Api from "./Api";
 
 function Dashboard(props) {
+  const {members, feedbacks} = Api()
   
   const [bigChartData, setbigChartData] = React.useState("data1");
   const setBgChartData = (name) => {
@@ -337,9 +339,10 @@ function Dashboard(props) {
               <CardBody>
                 <div className="table-full-width table-responsive">
                   <Table>
+                   
                     <tbody>
-                      {Api.feedbacks && Api.feedbacks.length > 0 ?(
-                      Api.feedbacks.map((feedback)=>(
+                      {feedbacks && feedbacks.length > 0 ?(
+                      feedbacks.map((feedback)=>(
                         <tr key={feedback.id}>
                         <td>
                           <FormGroup check>
@@ -379,6 +382,7 @@ function Dashboard(props) {
                       <tr><td colSpan="4">No Feedbacks found</td></tr>
                      )} 
                     </tbody>
+                  
                   </Table>
                 </div>
               </CardBody>
@@ -399,7 +403,8 @@ function Dashboard(props) {
                       <th className="text-center">Age</th>
                     </tr>
                   </thead>
-                  <tbody>{Api.members.map((member)=>(
+                  <tbody>{members && members.length > 0? (
+                  Api.members.map((member)=>(
                     <tr key={member.id}>
                     <td>{member.firstName}</td>
                     <td>{member.email}</td>
@@ -407,7 +412,11 @@ function Dashboard(props) {
                     <td className="text-center">{member.age}</td>
                   </tr>
 
-                  ))} 
+                  ))):(
+                    <tr>
+                      <td colSpan="4">No members found</td>
+                    </tr>
+                  )} 
                   </tbody>
                 </Table>
               </CardBody>
