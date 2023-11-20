@@ -6,7 +6,7 @@ import{ useEffect, useState } from "react";
 function Api(){
     const [members, setMembers] = useState([]);
     const [feedbacks, setFeedbacks] = useState([]);
-
+    const [deployments, setDeployments] = useState([]);
     useEffect(() => {
       axios.get('http://tathmini.live:8000/api/member/')
         .then(response => setMembers(response.data))
@@ -21,6 +21,14 @@ function Api(){
             
         .catch(error=> console.error('Error fetching feedback:',error));
     },[]);
-    return {members,feedbacks}
+    useEffect(() =>{
+        axios.get('http://tathmini.live:8000/api/deployment/')
+        .then(response => setDeployments(response.data))
+        .catch(error=> console.error('Error fetching deployments:',error));
+    },[]);
+
+
+
+    return {members,feedbacks, deployments}
 }
 export default Api;

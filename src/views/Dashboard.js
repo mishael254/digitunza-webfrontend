@@ -36,7 +36,7 @@ import {
 import Api from "./Api";
 
 function Dashboard(props) {
-  const {members, feedbacks} = Api()
+  const {members, feedbacks, deployments} = Api()
   
   const [bigChartData, setbigChartData] = React.useState("data1");
   const setBgChartData = (name) => {
@@ -302,7 +302,7 @@ function Dashboard(props) {
           <Col lg="6" md="12">
             <Card className="card-tasks">
               <CardHeader>
-                <h6 className="title d-inline">Tasks(5)</h6>
+                <h6 className="title d-inline">Unread</h6>
                 <p className="card-category d-inline"> today</p>
                 <UncontrolledDropdown>
                   <DropdownToggle
@@ -319,13 +319,13 @@ function Dashboard(props) {
                       href="#pablo"
                       onClick={(e) => e.preventDefault()}
                     >
-                      Action
+                      Select all
                     </DropdownItem>
                     <DropdownItem
                       href="#pablo"
                       onClick={(e) => e.preventDefault()}
                     >
-                      Another action
+                      Sort by date
                     </DropdownItem>
                     <DropdownItem
                       href="#pablo"
