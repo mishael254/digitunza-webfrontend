@@ -403,8 +403,9 @@ function Dashboard(props) {
                       <th className="text-center">Age</th>
                     </tr>
                   </thead>
-                  <tbody>{members && members.length > 0? (
-                  Api.members.map((member)=>(
+                  <tbody>
+                    {members && members.length > 0? (
+                     members.map((member)=>(
                     <tr key={member.id}>
                     <td>{member.firstName}</td>
                     <td>{member.email}</td>
