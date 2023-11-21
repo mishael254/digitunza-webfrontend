@@ -3,10 +3,14 @@ import React from "react";
 import { Link } from "react-router-dom"
 // reactstrap components
 import { Card, CardHeader, CardBody, Row, Col, Button } from "reactstrap";
+import Api from "./Api";
 
 //defining a function to handle click on the card
 
 function Projects() {
+  const {statLogs} = Api()
+  const uniqueProjects = new Set();
+  
   return (
     <>
       <div className="content">
@@ -30,91 +34,50 @@ function Projects() {
               <CardBody className="all-icons">
                 
                 <Row>
-                  <Col
-                    className="font-icon-list col-xs-6 col-xs-6 clickable-card"
-                    lg="2"
-                    md="3"
-                    sm="4"
-                    
-                    
-                  >
-                    <Link to={'/admin/projects-details'}>
-                      <div className="font-icon-detail">
-                        <i className="tim-icons icon-alert-circle-exc" />
-                        <p></p>
-                      </div>
-                    </Link>
-                  </Col>
-                  <Col
-                    className="font-icon-list col-xs-6 col-xs-6 clickable-card"
-                    lg="2"
-                    md="3"
-                    sm="4"
-                    
-                  >
-                    
-                    <Link to={'/admin/projects-details'}><div className="font-icon-detail">
-                      <i className="tim-icons icon-alert-circle-exc" />
-                      <p></p>
-                    </div>
-                    </Link>
-                  </Col>
-                  <Col
-                    className="font-icon-list col-xs-6 col-xs-6 clickable-card"
-                    lg="2"
-                    md="3"
-                    sm="4"
-                    
-                  >
-                    
-                    <Link to={'/admin/projects-details'}><div className="font-icon-detail">
-                      <i className="tim-icons icon-alert-circle-exc" />
-                      <p></p>
-                    </div>
-                    </Link>
-                  </Col>
-                  <Col
-                    className="font-icon-list col-xs-6 col-xs-6 clickable-card"
-                    lg="2"
-                    md="3"
-                    sm="4"
-                    
-                  >
-                    
-                    <Link to={'/admin/projects-details'}><div className="font-icon-detail">
-                      <i className="tim-icons icon-alert-circle-exc" />
-                      <p></p>
-                    </div>
-                    </Link>
-                  </Col>
-                  <Col
-                    className="font-icon-list col-xs-6 col-xs-6 clickable-card"
-                    lg="2"
-                    md="3"
-                    sm="4"
-                    
-                  >
-                    
-                    <Link to={'/admin/projects-details'}><div className="font-icon-detail">
-                      <i className="tim-icons icon-alert-circle-exc" />
-                      <p></p>
-                    </div>
-                    </Link>
-                  </Col>
-                  <Col
-                    className="font-icon-list col-xs-6 col-xs-6 clickable-card"
-                    lg="2"
-                    md="3"
-                    sm="4"
-                    
-                  >
-                    
-                    <Link to={'/admin/projects-details'}><div className="font-icon-detail">
-                      <i className="tim-icons icon-alert-circle-exc" />
-                      <p></p>
-                    </div>
-                    </Link>
-                  </Col>
+                <>
+                        {statLogs.map((log) => {
+                          // Skip rendering if the project has already been processed
+                          if (uniqueProjects.has(log.project)) {
+                            return null;
+                          }
+
+                          // Mark the project as processed in the set
+                          uniqueProjects.add(log.project);
+
+                          return (
+                            <Col
+                              key={log.id} // Assuming there's a unique identifier for each project
+                              className="font-icon-list col-xs-6 col-xs-6 clickable-card"
+                              lg="2"
+                              md="3"
+                              sm="4"
+                            >
+                              <Link to={`/admin/projects-details/${log.project}`}>
+                                <div className="font-icon-detail">
+                                  <i className="tim-icons icon-app" />
+                                  
+                                  <p>{log.project}</p>
+                                </div>
+                              </Link>
+                            </Col>
+                          );
+                        })}
+
+                        {/* Render a blank column if there are no projects */}
+                        {!statLogs.length && (
+                          <Col
+                            className="font-icon-list col-xs-6 col-xs-6 clickable-card"
+                            lg="2"
+                            md="3"
+                            sm="4"
+                          >
+                            <div className="font-icon-detail">
+                              <i className="tim-icons icon-alert-circle-exc" />
+                              <p></p>
+                            </div>
+                          </Col>
+                        )}
+                  </>
                 </Row>
               </CardBody>
             </Card>

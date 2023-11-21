@@ -36,7 +36,7 @@ import {
 import Api from "./Api";
 
 function Dashboard(props) {
-  const {members, feedbacks, deployments} = Api()
+  const {members, feedbacks, deployments, messages} = Api()
   
   const [bigChartData, setbigChartData] = React.useState("data1");
   const setBgChartData = (name) => {
@@ -139,11 +139,11 @@ function Dashboard(props) {
                 </div>
               <div class="col-7">
                 <div class="numbers">
-                  <p class="card-category">Deployments done</p>
-                  {deployments.length > 0? (
-                    <h3 className="card-title">{deployments.length}</h3>
+                  <p class="card-category">Messages</p>
+                  {messages.length > 0? (
+                    <h3 className="card-title">{messages.length}</h3>
                   ):(
-                    <p>0</p>
+                    <h3 className="card-title">0</h3>
                   )}
                 </div>
               </div>
@@ -288,7 +288,16 @@ function Dashboard(props) {
               <CardHeader>
                 <h5 className="card-category">Completed Deployments</h5>
                 <CardTitle tag="h3">
-                  <i className="tim-icons icon-send text-success" /> 12,100K
+                  
+                  {deployments.length > 0? (
+                  <>
+                    <i className="tim-icons icon-send text-success" />
+                    {deployments.length}
+                  </>
+                  ):(
+                    <p>0</p>
+                  )}
+                
                 </CardTitle>
               </CardHeader>
               <CardBody>

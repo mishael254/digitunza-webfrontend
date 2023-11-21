@@ -7,6 +7,10 @@ function Api(){
     const [members, setMembers] = useState([]);
     const [feedbacks, setFeedbacks] = useState([]);
     const [deployments, setDeployments] = useState([]);
+    const [statLogs, setStartLogs] = useState([]);
+    const [messages, setMessages] = useState([]);
+    const [playlists, setPlaylists] = useState([]);
+
     useEffect(() => {
       axios.get('http://tathmini.live:8000/api/member/')
         .then(response => setMembers(response.data))
@@ -27,8 +31,24 @@ function Api(){
         .catch(error=> console.error('Error fetching deployments:',error));
     },[]);
 
+    useEffect(()=>{
+      axios.get('http://tathmini.live:8000/api/statlog/')
+      .then(response => setStartLogs(response.data))
+      .catch(error =>console.error('Error fetching Statlogs:',error));
+    },[]);
+    useEffect(()=>{
+      axios.get('http://tathmini.live:8000/api/message/')
+      .then(response =>setMessages(response.data))
+      .catch(error => console.error('Error fetching messages:',error));
+    },[]);
+    useEffect(() =>{
+      axios.get('http://tathmini.live:8000/api/playlist/')
+      .then(response => setPlaylists(response.data))
+      .catch(error => console.error('Error fetching playlists:',error));
+    },[]);
 
 
-    return {members,feedbacks, deployments}
+
+    return {members,feedbacks, deployments, messages, statLogs, playlists}
 }
 export default Api;
