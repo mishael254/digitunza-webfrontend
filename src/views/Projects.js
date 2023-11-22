@@ -52,7 +52,10 @@ function Projects() {
                               md="3"
                               sm="4"
                             >
-                              <Link to={`/admin/projects-details/${log.project}`}>
+                              <Link to={{
+                                pathname:`/admin/projects-details/${log.project}`,
+                               
+                            }}>
                                 <div className="font-icon-detail">
                                   <i className="tim-icons icon-app" />
                                   

@@ -7,7 +7,7 @@ function Api(){
     const [members, setMembers] = useState([]);
     const [feedbacks, setFeedbacks] = useState([]);
     const [deployments, setDeployments] = useState([]);
-    const [statLogs, setStartLogs] = useState([]);
+    const [statLogs, setStatLogs] = useState([]);
     const [messages, setMessages] = useState([]);
     const [playlists, setPlaylists] = useState([]);
 
@@ -33,7 +33,7 @@ function Api(){
 
     useEffect(()=>{
       axios.get('http://tathmini.live:8000/api/statlog/')
-      .then(response => setStartLogs(response.data))
+      .then(response => setStatLogs(response.data))
       .catch(error =>console.error('Error fetching Statlogs:',error));
     },[]);
     useEffect(()=>{
