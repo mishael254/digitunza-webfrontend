@@ -190,4 +190,14 @@
   font-size: 36px; /* Adjust the size of the icon as needed */
   color: white; /* Set the color of the icon to white */
 }
+.custom-media-container {
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.custom-media-container video,
+.custom-media-container audio {
+  width: 100%;
+  height: auto;
+}
 

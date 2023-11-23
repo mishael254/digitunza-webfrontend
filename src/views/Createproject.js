@@ -218,8 +218,11 @@ function Createproject() {
                                 </div>
                                 
                               </div>
+                              <div class="row">
+                              <div class="col-md-12">
                               <div class="text-center card-footer">
                                 <div class = "row">
+                                  <div class="col-sm-2 col-form-label"><label class="col-sm-2 col-form-label">files to upload</label></div>{/**empty column for allignment */}
                                   <div class="col-sm-4 col-md-3">
                                     <div class = "card">
                                       <h4 class="card-title">{imageFile? imageFile.name:'No Thumbnail selected'}</h4>
@@ -227,7 +230,7 @@ function Createproject() {
                                           <input type="file" ref={imageInputRef} style={{display:'none'}} onChange={(e)=>handleFileChange(e,setImageFile)}></input>
                                             <div class="thumbnail img-circle">
                                                 {imageFile ?(
-                                                    <img src={URL.createObjectURL(imageFile)} alt="Selected" />
+                                                    <img src={URL.createObjectURL(imageFile)} alt="Selected" style={{ height: '200px', objectFit: 'cover', objectPosition: 'center' }}  />
                                                   ):(
                                                     <img src="" alt="..." /> 
                                               )}
@@ -240,15 +243,16 @@ function Createproject() {
                                         </div>
                                     </div>
                                   </div>
+                                 
                                   <div class="col-sm-4 col-md-3">
                                     
                                     <div class = "card">
                                       <h4 class="card-title">{audioFile? audioFile.name:'no audio file selected'}</h4>
                                         <div class="fileinput text-center">
                                           <input type="file" ref={audioInputRef} style={{display:'none'}} onChange={(e)=>handleFileChange(e,setAudioFile)}></input>
-                                            <div class="thumbnail img-circle">
+                                            <div class="thumbnail img-circle embed-responsive embed-responsive-16by9">
                                                 {audioFile ?(
-                                                    <audio src={URL.createObjectURL(audioFile)} controls />
+                                                    <audio class="embed-responsive-item" src={URL.createObjectURL(audioFile)} controls />
                                                   ):(
                                                     <audio src="" alt="..." /> 
                                               )}
@@ -261,14 +265,15 @@ function Createproject() {
                                         </div>
                                     </div>
                                   </div>
+                                  
                                   <div class="col-sm-4 col-md-3">
                                     <div class = "card">
                                       <h4 class="card-title">{videoFile? videoFile.name:'no video file'}</h4>
                                         <div class="fileinput text-center">
                                           <input type="file" ref={videoInputRef} style={{display:'none'}} onChange={(e)=>handleFileChange(e,setVideoFile)}></input>
-                                            <div class="thumbnail img-circle">
+                                            <div class="thumbnail img-circle embed-responsive embed-responsive-16by9">
                                                 {videoFile ?(
-                                                    <video src={URL.createObjectURL(videoFile)} controls />
+                                                    <video class="embed-responsive-item" src={URL.createObjectURL(videoFile)} controls />
                                                   ):(
                                                     <video src="" alt="..." /> 
                                               )}
@@ -281,10 +286,12 @@ function Createproject() {
                                         </div>
                                     </div>
                                   </div>
+                                 
                               </div>
                               </div>
                             </div>
-                            
+                            </div>
+                            </div>
                           </div>
                       </Table>
                    
