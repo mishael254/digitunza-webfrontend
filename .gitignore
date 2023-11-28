@@ -6,3 +6,4 @@ package-lock.json
 .eslintcache
 /github-assets
 /.github
+/server/node_modules

@@ -35,9 +35,10 @@ function Createproject() {
   });
   const handleFormChange = (e) => {
     const {name,value} = e.target;
-    setFormData((prevData)=>({
-      [name]:value,
-    }));
+    setFormData(prevData =>({
+      ...prevData,
+      [name]: value,
+    }))
   };
   const handleFormSubmit = ()=>{
     fetch('your-api-endpoint', {
@@ -55,12 +56,18 @@ function Createproject() {
       .catch(error => {
         console.error('Error:', error);
       });
-
+      const newPlaylistEntry = {
+        name:formData.messageTitle,
+        thumbnail:imageFile,
+        media: audioFile||videoFile,
+        uploadTime: new Date().toLocaleTimeString(),
+      };
+      setPlaylists([...playlists,newPlaylistEntry]);
   }
   const [imageFile, setImageFile] = useState(null);
   const[audioFile, setAudioFile] = useState(null);
   const [videoFile, setVideoFile] = useState(null);
-  
+  const [playlists, setPlaylists] = useState([]);
   const imageInputRef = useRef(null);
   const videoInputRef = useRef(null);
   const audioInputRef = useRef(null);
@@ -184,7 +191,7 @@ function Createproject() {
                                   <label class="col-sm-2 col-form-label">Message title</label>
                                     <div class="col-sm-7">
                                       <div class="form-group">
-                                        <input name="required" type="text" class="form-control"></input>
+                                        <input name="required" type="text" class="form-control" onChange={handleFormChange}></input>
                                       </div>
                                     </div>
                                     <label class="label-on-right col-sm-3"><code>required</code></label>
@@ -391,48 +398,20 @@ function Createproject() {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td className="text-center"></td>
-                    </tr>
-                    <tr>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td className="text-center"></td>
-                    </tr>
-                    <tr>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td className="text-center"></td>
-                    </tr>
-                    <tr>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td className="text-center"></td>
-                    </tr>
-                    <tr>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td className="text-center"></td>
-                    </tr>
-                    <tr>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td className="text-center"></td>
-                    </tr>
-                    <tr>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td className="text-center"></td>
-                    </tr>
+                  {playlists.map((playlist, index) => (
+                      <tr key={index}>
+                        <td>{playlist.name}</td>
+                        <td>
+                          <img
+                            src={playlist.thumbnail ? URL.createObjectURL(playlist.thumbnail) : ''}
+                            alt={playlist.name}
+                            style={{ height: '50px', width: '50px', objectFit: 'cover' }}
+                          />
+                        </td>
+                        <td>{playlist.media ? playlist.media.name : ''}</td>
+                        <td className="text-center">{playlist.uploadTime}</td>
+                      </tr>
+                    ))}
                   </tbody>
                 </Table>
                 <Col md="4">
