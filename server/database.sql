@@ -71,3 +71,4 @@ CREATE TABLE IF NOT EXISTS lessons (
     playlist INTEGER,
     deployment INTEGER
 );
+
