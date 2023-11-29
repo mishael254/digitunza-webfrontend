@@ -420,7 +420,7 @@ function Dashboard(props) {
                     {members && members.length > 0? (
                      members.map((member)=>(
                     <tr key={member.id}>
-                    <td>{member.firstName}</td>
+                    <td>{member.firstname}</td>
                     <td>{member.email}</td>
                     <td>{member.phone}</td>
                     <td className="text-center">{member.age}</td>

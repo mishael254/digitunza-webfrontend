@@ -23,14 +23,24 @@ const db = pgp(postgresConfig);
 // Fetch and save data for each entity
 app.get('/api/getMembers', async (req, res) => {
   try {
+    // Attempt to fetch data from the external API
     const apiEndpoint = 'http://tathmini.live:8000/api/member/';
     const response = await axios.get(apiEndpoint);
+
+    // Save data to the database if API is reachable
     await saveDataToDatabase('members', response.data);
-    // Fetch the updated data from the database
+  } catch (error) {
+    console.error('Error fetching members from API:', error);
+
+    // If API is not reachable, log the error but continue
+  }
+
+  try {
+    // Fetch data from the database (either the newly updated data or the existing data)
     const dbData = await db.any('SELECT * FROM members');
     res.status(200).json(dbData);
-  } catch (error) {
-    console.error('Error fetching members:', error);
+  } catch (dbError) {
+    console.error('Error fetching members from database:', dbError);
     res.status(500).send('Internal Server Error');
   }
 });
@@ -49,58 +59,113 @@ app.get('/api/getMembers', async (req, res) => {
     }
   });*/
 
+
+//deployments
+
+
 app.get('/api/getDeployments', async (req, res) => {
-    try {
-      const apiEndpoint = 'http://tathmini.live:8000/api/deployment/';
-      const response = await axios.get(apiEndpoint);
-      await saveDataToDatabase('deployments', response.data);
-       // Fetch the updated data from the database
-      const dbData = await db.any('SELECT * FROM deployments');
-      res.status(200).json(dbData);
-      
-    } catch (error) {
-      console.error('Error fetching deployments', error);
-      res.status(500).send('Internal Server Error');
-    }
+  try {
+    // Attempt to fetch data from the external API
+    const apiEndpoint = 'http://tathmini.live:8000/api/deployment/';
+    const response = await axios.get(apiEndpoint);
+
+    // Save data to the database if API is reachable
+    await saveDataToDatabase('deployments', response.data);
+  } catch (error) {
+    console.error('Error fetching deployments from API:', error);
+
+    // If API is not reachable, log the error but continue
+  }
+
+  try {
+    // Fetch data from the database (either the newly updated data or the existing data)
+    const dbData = await db.any('SELECT * FROM deployments');
+    res.status(200).json(dbData);
+  } catch (dbError) {
+    console.error('Error fetching deployments from database:', dbError);
+    res.status(500).send('Internal Server Error');
+  }
   });
+
+  //statlogs
+
+
 app.get('/api/getStatlog', async (req, res) => {
-    try {
-      const apiEndpoint = 'http://tathmini.live:8000/api/statlog/';
-      const response = await axios.get(apiEndpoint);
-      await saveDataToDatabase('statlogs', response.data);
-       // Fetch the updated data from the database
-      const dbData = await db.any('SELECT * FROM statlogs');
-      res.status(200).json(dbData);
-    } catch (error) {
-      console.error('Error fetching statlogs', error);
-      res.status(500).send('Internal Server Error');
-    }
+  try {
+    // Attempt to fetch data from the external API
+    const apiEndpoint = 'http://tathmini.live:8000/api/statlog/';
+    const response = await axios.get(apiEndpoint);
+
+    // Save data to the database if API is reachable
+    await saveDataToDatabase('statlogs', response.data);
+  } catch (error) {
+    console.error('Error fetching statlogs from API:', error);
+
+    // If API is not reachable, log the error but continue
+  }
+
+  try {
+    // Fetch data from the database (either the newly updated data or the existing data)
+    const dbData = await db.any('SELECT * FROM statlogs');
+    res.status(200).json(dbData);
+  } catch (dbError) {
+    console.error('Error fetching statlogs from database:', dbError);
+    res.status(500).send('Internal Server Error');
+  }
   });
+
+
+  //messages
+
+
 app.get('/api/getMessages', async (req, res) => {
-    try {
-      const apiEndpoint = 'http://tathmini.live:8000/api/message/';
-      const response = await axios.get(apiEndpoint);
-      await saveDataToDatabase('messages', response.data);
-       // Fetch the updated data from the database
-      const dbData = await db.any('SELECT * FROM messages');
-      res.status(200).json(dbData);
-    } catch (error) {
-      console.error('Error fetching messages', error);
-      res.status(500).send('Internal Server Error');
-    }
+  try {
+    // Attempt to fetch data from the external API
+    const apiEndpoint = 'http://tathmini.live:8000/api/message/';
+    const response = await axios.get(apiEndpoint);
+
+    // Save data to the database if API is reachable
+    await saveDataToDatabase('messages', response.data);
+  } catch (error) {
+    console.error('Error fetching messages from API:', error);
+
+    // If API is not reachable, log the error but continue
+  }
+
+  try {
+    // Fetch data from the database (either the newly updated data or the existing data)
+    const dbData = await db.any('SELECT * FROM messages');
+    res.status(200).json(dbData);
+  } catch (dbError) {
+    console.error('Error fetching messages from database:', dbError);
+    res.status(500).send('Internal Server Error');
+  }
   });
+
+  //playlists
+
 app.get('/api/getPlaylist', async (req, res) => {
-    try {
-      const apiEndpoint = 'http://tathmini.live:8000/api/playlist/';
-      const response = await axios.get(apiEndpoint);
-      await saveDataToDatabase('playlists', response.data);
-       // Fetch the updated data from the database
-      const dbData = await db.any('SELECT * FROM playlists');
-      res.status(200).json(dbData);
-    } catch (error) {
-      console.error('Error fetching playlists', error);
-      res.status(500).send('Internal Server Error');
-    }
+  try {
+    // Attempt to fetch data from the external API
+    const apiEndpoint = 'http://tathmini.live:8000/api/playlist/';
+    const response = await axios.get(apiEndpoint);
+
+    // Save data to the database if API is reachable
+    await saveDataToDatabase('playlists', response.data);
+  } catch (error) {
+    console.error('Error fetching playlists from API:', error);
+
+    // If API is not reachable, log the error but continue
+  }
+
+  try {
+    // Fetch data from the database (either the newly updated data or the existing data)
+    const dbData = await db.any('SELECT * FROM playlists');
+    res.status(200).json(dbData);
+  } catch (dbError) {
+    console.error('Error fetching playlists from database:', dbError);
+    res.status(500).send('Internal Server Error');
+  }
   });
   
   

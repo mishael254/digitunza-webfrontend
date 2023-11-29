@@ -44,7 +44,7 @@ function Api() {
 
   const fetchFeedbacks = async () => {
     try {
-      const response = await axios.get("http://localhost:3001/api/getFeedbacks"); // Update with your backend route
+      const response = await axios.get("http://localhost:3001/api/getFeedbacks"); // backend route
       setFeedbacks(response.data);
     } catch (error) {
       console.error("Error fetching feedbacks:", error);
@@ -53,7 +53,7 @@ function Api() {
 
   const fetchDeployments = async () => {
     try {
-      const response = await axios.get("http://localhost:3001/api/getDeployments"); // Update with your backend route
+      const response = await axios.get("http://localhost:3001/api/getDeployments"); // backend route
       setDeployments(response.data);
     } catch (error) {
       console.error("Error fetching deployments:", error);
