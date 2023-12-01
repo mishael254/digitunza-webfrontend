@@ -26,7 +26,8 @@ app.get('/api/getMembers', async (req, res) => {
     // Attempt to fetch data from the external API
     const apiEndpoint = 'http://tathmini.live:8000/api/member/';
     const response = await axios.get(apiEndpoint);
-
+    //create table if there is none 
+    await createTableIfNotExists('members', response.data);
     // Save data to the database if API is reachable
     await saveDataToDatabase('members', response.data);
   } catch (error) {
@@ -68,7 +69,8 @@ app.get('/api/getDeployments', async (req, res) => {
     // Attempt to fetch data from the external API
     const apiEndpoint = 'http://tathmini.live:8000/api/deployment/';
     const response = await axios.get(apiEndpoint);
-
+    //create table if there is none 
+    await createTableIfNotExists('deployments', response.data);
     // Save data to the database if API is reachable
     await saveDataToDatabase('deployments', response.data);
   } catch (error) {
@@ -95,7 +97,8 @@ app.get('/api/getStatlog', async (req, res) => {
     // Attempt to fetch data from the external API
     const apiEndpoint = 'http://tathmini.live:8000/api/statlog/';
     const response = await axios.get(apiEndpoint);
-
+    //create table if there is none 
+    await createTableIfNotExists('statlogs', response.data);
     // Save data to the database if API is reachable
     await saveDataToDatabase('statlogs', response.data);
   } catch (error) {
@@ -123,7 +126,8 @@ app.get('/api/getMessages', async (req, res) => {
     // Attempt to fetch data from the external API
     const apiEndpoint = 'http://tathmini.live:8000/api/message/';
     const response = await axios.get(apiEndpoint);
-
+    //create table if there is none 
+    await createTableIfNotExists('messages', response.data);
     // Save data to the database if API is reachable
     await saveDataToDatabase('messages', response.data);
   } catch (error) {
@@ -149,7 +153,8 @@ app.get('/api/getPlaylist', async (req, res) => {
     // Attempt to fetch data from the external API
     const apiEndpoint = 'http://tathmini.live:8000/api/playlist/';
     const response = await axios.get(apiEndpoint);
-
+    //create table if there is none 
+    await createTableIfNotExists('playlists', response.data);
     // Save data to the database if API is reachable
     await saveDataToDatabase('playlists', response.data);
   } catch (error) {
@@ -168,18 +173,53 @@ app.get('/api/getPlaylist', async (req, res) => {
   }
   });
   
+  //projects
+
+  app.get('/api/getProjects', async (req, res) => {
+    try {
+      // Attempt to fetch data from the external API
+      const apiEndpoint = 'http://tathmini.live:8000/api/project/';
+      const response = await axios.get(apiEndpoint);
+      //create table if there is none 
+      await createTableIfNotExists('projects', response.data);
+      // Save data to the database if API is reachable
+      
+      await saveDataToDatabase('projects', response.data);
+    } catch (error) {
+      console.error('Error fetching projects from API:', error);
   
+      // If API is not reachable, log the error but continue
+    }
+  
+    try {
+      // Fetch data from the database (either the newly updated data or the existing data)
+      const dbData = await db.any('SELECT * FROM projects');
+      res.status(200).json(dbData);
+    } catch (dbError) {
+      console.error('Error fetching projects from database:', dbError);
+      res.status(500).send('Internal Server Error');
+    }
+    });
+    
+    
 
 
 
 async function createTableIfNotExists(tableName, data) {
   try {
-    const columnDefinitions = generateColumnDefinitions(data);
-    const createTableQuery = `CREATE TABLE IF NOT EXISTS ${tableName} (${columnDefinitions})`;
-    await db.none(createTableQuery);
-    console.log(`Table "${tableName}" created if it didn't exist.`);
+    //check if the table exists
+    const tableExistsQuery = `SELECT to_regclass('${tableName}')`;
+    const tableExistsResult = await db.oneOrNone(tableExistsQuery);
+    if(!tableExistsResult.to_regclass){
+      const columnDefinitions = generateColumnDefinitions(data);
+      const createTableQuery = `CREATE TABLE IF NOT EXISTS ${tableName} (${columnDefinitions})`;
+      await db.none(createTableQuery);
+      console.log(`Table "${tableName}" created if it didn't exist.`);
+
+    }
+    
   } catch (error) {
-    console.error(`Error creating table "${tableName}":`, error);
+    console.error(`Error checking or creating table "${tableName}":`, error);
   }
 }
 
@@ -189,6 +229,9 @@ function sanitizeNumericField(value) {
 
 async function saveDataToDatabase(tableName, data) {
   try {
+    //check if the table exists, and create it if it doesn't
+    await createTableIfNotExists(tableName, data);
+
     const columns = Object.keys(data[0]);
     const columnsList = columns.map(column => column === 'group' ? `"group"` : column).join(', ');
     const valuesPlaceholders = columns.map((_, index) => `$${index + 1}`).join(', ');

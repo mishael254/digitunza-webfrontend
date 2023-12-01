@@ -2,14 +2,35 @@
 import React from "react";
 import { Link } from "react-router-dom"
 // reactstrap components
-import { Card, CardHeader, CardBody, Row, Col, Button } from "reactstrap";
-import Api from "./Api";
+import { Card, CardHeader, CardBody, Row, Col, Button, Spinner } from "reactstrap";
 
+import Api from "./Api";
 //defining a function to handle click on the card
 
 function Projects() {
-  const {statLogs} = Api()
+  const {statLogs, isLoading} = Api();
   const uniqueProjects = new Set();
+
+  if (isLoading){
+    return <div className="content"> 
+      <Row>
+      <Col
+          className="font-icon-list col-xs-6 col-xs-6 clickable-card"
+          lg="2"
+          md="3"
+          sm="4"
+        ><Card>
+            <div><h3>Loading...</h3></div>
+              
+              <Spinner color="primary" animation="border" role="status">
+              
+              </Spinner>
+            
+          </Card>
+      </Col>
+      </Row>
+  </div>
+  }
   
   return (
     <>
@@ -76,7 +97,8 @@ function Projects() {
                           >
                             <div className="font-icon-detail">
                               <i className="tim-icons icon-alert-circle-exc" />
-                              <p></p>
+                              <p>error</p>
+                              
                             </div>
                           </Col>
                         )}

@@ -108,7 +108,7 @@ function Sidebar(props) {
             <Nav>
               {routes.map((prop, key) => {
                 //adding routes that i dont want them to be rendered in the sidebar
-                const excludedRoutes = ["/projects-details","/create-project",];
+                const excludedRoutes = ["/projects-details/:projectName","/create-project",];
                 if (prop.redirect ||excludedRoutes.includes(prop.path)) {
                   return null; // Exclude ProjectDetails route and additional routes that you dont want them to be rendered by the sidebar
                 }

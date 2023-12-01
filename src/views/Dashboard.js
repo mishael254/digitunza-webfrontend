@@ -36,12 +36,12 @@ import {
 import Api from "./Api";
 
 function Dashboard(props) {
-  const {members, feedbacks, deployments, messages} = Api()
-  
+  const {members, feedbacks, deployments, messages, projects } = Api();
   const [bigChartData, setbigChartData] = React.useState("data1");
   const setBgChartData = (name) => {
     setbigChartData(name);
   };
+  
   return (
     <>
       <div className="content">
@@ -52,7 +52,7 @@ function Dashboard(props) {
                 <Row>
                   <Col className="text-left" sm="6">
                     <h5 className="card-category">Total data</h5>
-                    <CardTitle tag="h2">Feedback</CardTitle>
+                    <CardTitle tag="h2">Members</CardTitle>
                   </Col>
                   <Col sm="6">
                     <ButtonGroup
@@ -70,7 +70,7 @@ function Dashboard(props) {
                         onClick={() => setBgChartData("data1")}
                       >
                         <span className="d-none d-sm-block d-md-block d-lg-block d-xl-block">
-                          Deployments
+                          Projects
                         </span>
                         <span className="d-block d-sm-none">
                           <i className="tim-icons icon-single-02" />
@@ -87,7 +87,7 @@ function Dashboard(props) {
                         onClick={() => setBgChartData("data2")}
                       >
                         <span className="d-none d-sm-block d-md-block d-lg-block d-xl-block">
-                          Uploads
+                          Counties
                         </span>
                         <span className="d-block d-sm-none">
                           <i className="tim-icons icon-gift-2" />
@@ -104,7 +104,7 @@ function Dashboard(props) {
                         onClick={() => setBgChartData("data3")}
                       >
                         <span className="d-none d-sm-block d-md-block d-lg-block d-xl-block">
-                          Downloads
+                          Age
                         </span>
                         <span className="d-block d-sm-none">
                           <i className="tim-icons icon-tap-02" />
