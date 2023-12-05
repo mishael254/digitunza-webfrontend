@@ -72,3 +72,12 @@ CREATE TABLE IF NOT EXISTS lessons (
     deployment INTEGER
 );
 
+CREATE TABLE projects (
+    id SERIAL PRIMARY KEY,
+    projectname VARCHAR(255)
+);
+
+/**adding data manually*/
+INSERT INTO projects
+       [ ( column_name [projectname] ) ]
+       VALUE ( value [uhalisi] );

@@ -28,7 +28,7 @@ import {
 
 // core components
 import {
-  chartExample1,
+  //chartExample1,
   chartExample2,
   chartExample3,
   chartExample4,
@@ -41,7 +41,50 @@ function Dashboard(props) {
   const setBgChartData = (name) => {
     setbigChartData(name);
   };
-  
+
+  //extracting member data
+  //const memberLabels = members.map((member)=>member.firstname);
+  //const memberData = members.map((member) => member.project ? 1000 : 0)
+  const membersCountByProject = projects.map((project) => {
+    const count = members.filter((member) => member.project === project.id).length;
+    return count;
+  });
+
+  //extracting project names
+
+  const projectNames = projects.map((project) => project.projectname);
+
+  //generating dynamic data
+
+  const chartData = {
+    labels: projectNames,
+    datasets:[
+      {
+        label: "Members Count",
+        fill: true,
+        backgroundColor: "rgba(29,140,248,0.2)",
+        borderColor: "#1f8ef1",
+        borderWidth: 2,
+        data: membersCountByProject,
+      },
+    ],
+  };
+  const chartOptions = {
+    maintainAspectRatio: false,
+    legend: {
+      display: false,
+    },
+    scales: {
+      yAxes: [{
+        ticks: {
+          suggestedMin: 0,
+          suggestedMax: 1000,
+        },
+      }],
+    },
+    // ... (other options)
+  };
+
   return (
     <>
       <div className="content">
@@ -117,8 +160,8 @@ function Dashboard(props) {
               <CardBody>
                 <div className="chart-area">
                   <Line
-                    data={chartExample1[bigChartData]}
-                    options={chartExample1.options}
+                    data={chartData}
+                    options={chartOptions}
                   />
                 </div>
               </CardBody>

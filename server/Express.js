@@ -30,6 +30,8 @@ app.get('/api/getMembers', async (req, res) => {
     await createTableIfNotExists('members', response.data);
     // Save data to the database if API is reachable
     await saveDataToDatabase('members', response.data);
+    //wait to update the table members
+    await updateMembersTableWithAddress();
   } catch (error) {
     console.error('Error fetching members from API:', error);
 
@@ -200,29 +202,65 @@ app.get('/api/getPlaylist', async (req, res) => {
       res.status(500).send('Internal Server Error');
     }
     });
+
+
     
     
 
 
 
-async function createTableIfNotExists(tableName, data) {
-  try {
-    //check if the table exists
-    const tableExistsQuery = `SELECT to_regclass('${tableName}')`;
-    const tableExistsResult = await db.oneOrNone(tableExistsQuery);
-    if(!tableExistsResult.to_regclass){
-      const columnDefinitions = generateColumnDefinitions(data);
-      const createTableQuery = `CREATE TABLE IF NOT EXISTS ${tableName} (${columnDefinitions})`;
-      await db.none(createTableQuery);
-      console.log(`Table "${tableName}" created if it didn't exist.`);
-
+    async function createTableIfNotExists(tableName, data) {
+      try {
+        // Check if the table exists
+        const tableExistsQuery = `SELECT to_regclass('${tableName}')`;
+        const tableExistsResult = await db.oneOrNone(tableExistsQuery);
+    
+        if (!tableExistsResult.to_regclass) {
+          // Generate basic column definitions with inferred data types
+          const basicColumns = generateColumnDefinitions(data);
+    
+          // Create the table with basic columns
+          let columnDefinitions = [...basicColumns];
+          
+          // Add additional columns only for the 'members' table
+          if (tableName === 'members') {
+            const additionalColumns = [
+              'county VARCHAR(255)',
+              'locality VARCHAR(255)',
+            ];
+            columnDefinitions = [...basicColumns, ...additionalColumns];
+          }
+    
+          const createTableQuery = `CREATE TABLE IF NOT EXISTS ${tableName} (${columnDefinitions.join(', ')});`;
+          await db.none(createTableQuery);
+          console.log(`Table "${tableName}" created if it didn't exist.`);
+        }
+      } catch (error) {
+        console.error(`Error checking or creating table "${tableName}":`, error);
+      }
     }
     
-  } catch (error) {
-    console.error(`Error checking or creating table "${tableName}":`, error);
-  }
-}
-
+    function generateColumnDefinitions(data) {
+      const columns = Object.keys(data[0] || {});
+      return columns.map(column => {
+        const exampleValue = data.find(row => row[column]);
+        const dataType = inferDataType(exampleValue[column]);
+        return `${column} ${dataType}`;
+      });
+    }
+    
+    function inferDataType(value) {
+      if (typeof value === 'number') {
+        return 'NUMERIC';
+      } else if (typeof value === 'boolean') {
+        return 'BOOLEAN';
+      } else if (value instanceof Date) {
+        return 'TIMESTAMP';
+      } else {
+        return 'VARCHAR(255)';
+      }
+    }
+    
 function sanitizeNumericField(value) {
   return value === "" || value === null ? null : Number(value);
 }
@@ -252,10 +290,71 @@ async function saveDataToDatabase(tableName, data) {
     console.error(`Error saving data to table "${tableName}":`, error);
   }
 }
+// Function to get county and locality from Google Geocoding API
+async function getAddressFromGeocodingAPI(latitude, longitude) {
+  try {
+    const apiKey = 'AIzaSyBWEwmfSFoTODvAO8ywUPdXgqHxHPevPd4'; // Replace with your actual API key
+    const apiUrl = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${apiKey}`;
+
+    const response = await axios.get(apiUrl);
+
+    if (response.data && response.data.results && response.data.results.length > 0) {
+      const addressComponents = response.data.results[0].address_components;
+
+      const county = extractAddressComponent(addressComponents, 'administrative_area_level_1');
+      const locality = extractAddressComponent(addressComponents, 'locality');
+
+      return { county, locality };
+    }
+
+    return { county: null, locality: null };
+  } catch (error) {
+    console.error('Error getting address from Geocoding API:', error);
+    return { county: null, locality: null };
+  }
+}
+
+// Function to update members table with county and locality
+async function updateMembersTableWithAddress() {
+  try {
+    // Fetch members data from the database
+    const membersData = await db.any('SELECT * FROM members');
+
+    // Loop through each member and update county and locality
+    for (const member of membersData) {
+      const { latitude, longitude } = member;
+      
+      // Skip if latitude or longitude is missing
+      if (!latitude || !longitude) {
+        continue;
+      }
+
+      // Get county and locality from Geocoding API
+      const { county, locality } = await getAddressFromGeocodingAPI(latitude, longitude);
+
+      // Update members table with county and locality
+      const updateQuery = `
+        UPDATE members
+        SET county = $1, locality = $2
+        WHERE id = $3;
+      `;
+
+      await db.none(updateQuery, [county, locality, member.id]);
+    }
+
+    console.log('Members table updated with county and locality.');
+  } catch (error) {
+    console.error('Error updating members table with address:', error);
+  }
+}
+
+// Call the function to update members table with county and locality
+
 
 
 function generateColumnDefinitions(data) {
-  const columns = Object.keys(data[0] || {}).map(column => `${column} VARCHAR(255)`);
+  const columns = ['id SERIAL PRIMARY KEY', ...Object.keys(data[0] || {}).map(column => `${column} VARCHAR(255)`)];
+  
   return columns.join(', ');
 }
 

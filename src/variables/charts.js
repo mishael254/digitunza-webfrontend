@@ -24,8 +24,11 @@ let chart1_2_options = {
         zeroLineColor: "transparent",
       },
       ticks: {
-        suggestedMin: 60,
-        suggestedMax: 125,
+        suggestedMin: 0,
+        suggestedMax: 1000,
+        beginAtZero: true,
+        stepSize: 1, // Set step size to 1 to display only whole numbers
+        min: 0,
         padding: 20,
         fontColor: "#9a9a9a",
       },
