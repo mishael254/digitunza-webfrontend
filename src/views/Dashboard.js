@@ -36,8 +36,9 @@ import {
 import Api from "./Api";
 
 function Dashboard(props) {
-  const {members, feedbacks, deployments, messages, projects } = Api();
+  const {members, feedbacks, deployments, messages, projects,statLogs } = Api();
   const [bigChartData, setbigChartData] = React.useState("data1");
+  const [mostConcurrentTopics, setMostConcurrentTopics] = useState([]);
   const setBgChartData = (name) => {
     setbigChartData(name);
   };
@@ -55,12 +56,39 @@ function Dashboard(props) {
   const projectNames = projects.map((project) => project.projectname);
 
   //generating dynamic data
+  useEffect(() => {
+    // Extracting topics from statLogs
+    const topics = statLogs.map((log) => log.topic);
+
+    // Counting occurrences of each topic
+    const topicCounts = topics.reduce((acc, topic) => {
+      acc[topic] = (acc[topic] || 0) + 1;
+      return acc;
+    }, {});
+
+    // Sorting topics by frequency
+    const sortedTopics = Object.keys(topicCounts).sort(
+      (a, b) => topicCounts[b] - topicCounts[a]
+    );
+
+    // Getting the top 5 most concurrent topics
+    const topTopics = sortedTopics.slice(0, 5);
+
+    // Creating an array with the topic names and their occurrence count
+    const mostConcurrentTopicsData = topTopics.map((topic) => ({
+      topic,
+      count: topicCounts[topic],
+    }));
+
+    setMostConcurrentTopics(mostConcurrentTopicsData);
+  }, [statLogs]);
+
 
   const chartData = {
     labels: projectNames,
     datasets:[
       {
-        label: "Members Count",
+        label: "Per project",
         fill: true,
         backgroundColor: "rgba(29,140,248,0.2)",
         borderColor: "#1f8ef1",
@@ -94,7 +122,7 @@ function Dashboard(props) {
               <CardHeader>
                 <Row>
                   <Col className="text-left" sm="6">
-                    <h5 className="card-category">Total data</h5>
+                    <h5 className="card-category">Total Distribution of</h5>
                     <CardTitle tag="h2">Members</CardTitle>
                   </Col>
                   <Col sm="6">
@@ -182,7 +210,7 @@ function Dashboard(props) {
                 </div>
               <div class="col-7">
                 <div class="numbers">
-                  <p class="card-category">Messages</p>
+                  <p class="card-category">Topics aired</p>
                   {messages.length > 0? (
                     <h3 className="card-title">{messages.length}</h3>
                   ):(
@@ -196,7 +224,7 @@ function Dashboard(props) {
             
             <div class="stats">
               <i class="tim-icons icon-refresh-01"></i>
-               Update Now
+               Learn more
             </div>
             
           </div>
@@ -215,8 +243,8 @@ function Dashboard(props) {
                 </div>
                 <div class="col-7">
                   <div class="numbers">
-                    <p class="card-category">Followers</p>
-                    <h3 class="card-title">+45k</h3>
+                    <p class="card-category">Counties</p>
+                    <h3 class="card-title">47</h3>
                   </div>
                 </div>
               </div>
@@ -224,7 +252,7 @@ function Dashboard(props) {
             <div class="card-footer">
               <div class="stats">
                 <i class="tim-icons icon-sound-wave"></i>
-                 Last Research
+                 Counties Reached
               </div>
             </div>
           </div>
@@ -242,7 +270,7 @@ function Dashboard(props) {
                   </div>
                   <div class="col-7">
                     <div class="numbers">
-                      <p class="card-category">Users</p>
+                      <p class="card-category">Members</p>
                       <h3 class="card-title">150,000</h3>
                     </div>
                   </div>
@@ -252,7 +280,7 @@ function Dashboard(props) {
                 
                 <div class="stats">
                   <i class="tim-icons icon-trophy"></i>
-                   Customers feedback
+                   Members registered
                 </div>
               </div>
             </div>
@@ -270,7 +298,7 @@ function Dashboard(props) {
                   </div>
                   <div class="col-7">
                     <div class="numbers">
-                      <p class="card-category">Errors</p>
+                      <p class="card-category">Groups</p>
                       <h3 class="card-title">12</h3>
                     </div>
                   </div>
@@ -280,7 +308,7 @@ function Dashboard(props) {
                
                 <div class="stats">
                   <i class="tim-icons icon-watch-time"></i>
-                   In the last hours
+                   Online In the last hours
                 </div>
               </div>
             </div>
@@ -292,7 +320,7 @@ function Dashboard(props) {
           <Col lg="4">
             <Card className="card-chart">
               <CardHeader>
-                <h5 className="card-category">Total Downloads</h5>
+                <h5 className="card-category">Occupation Distribution</h5>
                 <CardTitle tag="h3">
                   <i className="tim-icons icon-bell-55 text-info" /> 763,215
                 </CardTitle>
@@ -310,7 +338,7 @@ function Dashboard(props) {
           <Col lg="4">
             <Card className="card-chart">
               <CardHeader>
-                <h5 className="card-category">Project uploads</h5>
+                <h5 className="card-category">Project Distribution</h5>
                 <CardTitle tag="h3">
                   <i className="tim-icons icon-delivery-fast text-primary" />{" "}
                   3,500
@@ -447,31 +475,31 @@ function Dashboard(props) {
           <Col lg="6" md="12">
             <Card>
               <CardHeader>
-                <CardTitle tag="h4">Simple Table</CardTitle>
+                <CardTitle tag="h4">Common topics listened</CardTitle>
               </CardHeader>
               <CardBody>
                 <Table className="tablesorter" responsive>
                   <thead className="text-primary">
                     <tr>
-                      <th>Member</th>
-                      <th>Country</th>
-                      <th>Phone</th>
-                      <th className="text-center">Age</th>
+                      <th>Topic</th>
+                      <th>Length</th>
+                      <th>messages</th>
+                      
                     </tr>
                   </thead>
                   <tbody>
-                    {members && members.length > 0? (
-                     members.map((member)=>(
-                    <tr key={member.id}>
-                    <td>{member.firstname}</td>
-                    <td>{member.email}</td>
-                    <td>{member.phone}</td>
-                    <td className="text-center">{member.age}</td>
+                    {mostConcurrentTopics.length > 0 ? (
+                     mostConcurrentTopics.map((topicData, index)=>(
+                    <tr key={index}>
+                    <td>{topicData.topic}</td>
+                    <td>{/* Add length data if available */}</td>
+                    <td>{topicData.count}</td>
+                    
                   </tr>
 
                   ))):(
                     <tr>
-                      <td colSpan="4">No members found</td>
+                      <td colSpan="4">No Topics found</td>
                     </tr>
                   )} 
                   </tbody>

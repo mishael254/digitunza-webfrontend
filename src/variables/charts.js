@@ -191,10 +191,10 @@ let chartExample2 = {
     gradientStroke.addColorStop(0, "rgba(29,140,248,0)"); //blue colors
 
     return {
-      labels: ["JUL", "AUG", "SEP", "OCT", "NOV", "DEC"],
+      labels: ["Ukulima True", "Bulesi Bulahi", "Washa Njia", "Twanga Cholera", "Dawa za kulevya", "Twanga Covid"],
       datasets: [
         {
-          label: "Data",
+          label: "Per project",
           fill: true,
           backgroundColor: gradientStroke,
           borderColor: "#1f8ef1",
@@ -233,7 +233,7 @@ let chartExample3 = {
       labels: ["Kiambu", "Meru", "Laikipia", "Kirinyaga", "Nakuru", "Turkana"],
       datasets: [
         {
-          label: "County",
+          label: "Per County",
           fill: true,
           backgroundColor: gradientStroke,
           hoverBackgroundColor: gradientStroke,
@@ -308,7 +308,7 @@ const chartExample4 = {
       labels: ["JUL", "AUG", "SEP", "OCT", "NOV"],
       datasets: [
         {
-          label: "My First dataset",
+          label: "monthly",
           fill: true,
           backgroundColor: gradientStroke,
           borderColor: "#00d6b4",
