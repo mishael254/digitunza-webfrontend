@@ -39,6 +39,7 @@ function Dashboard(props) {
   const {members, feedbacks, deployments, messages, projects,statLogs } = Api();
   const [bigChartData, setbigChartData] = React.useState("data1");
   const [mostConcurrentTopics, setMostConcurrentTopics] = useState([]);
+  const [topicMessagesMap, setTopicMessagesMap] = useState({});
   const setBgChartData = (name) => {
     setbigChartData(name);
   };
@@ -78,10 +79,27 @@ function Dashboard(props) {
     const mostConcurrentTopicsData = topTopics.map((topic) => ({
       topic,
       count: topicCounts[topic],
+      messages:[],
     }));
 
     setMostConcurrentTopics(mostConcurrentTopicsData);
+
+    // Creating a map to store message titles for each topic
+    const topicMessages = {};
+
+    // Populating the map
+    statLogs.forEach((log) => {
+      const { topic, messagetitle } = log;
+      if (!topicMessages[topic]) {
+        topicMessages[topic] = new Set();
+      }
+      topicMessages[topic].add(messagetitle);
+    });
+
+    setTopicMessagesMap(topicMessages);
   }, [statLogs]);
+
+  
 
 
   const chartData = {
@@ -271,7 +289,11 @@ function Dashboard(props) {
                   <div class="col-7">
                     <div class="numbers">
                       <p class="card-category">Members</p>
-                      <h3 class="card-title">150,000</h3>
+                      {members.length > 0? (
+                    <h3 className="card-title">{members.length}</h3>
+                  ):(
+                    <h3 className="card-title">0</h3>
+                  )}
                     </div>
                   </div>
                 </div>
@@ -482,26 +504,32 @@ function Dashboard(props) {
                   <thead className="text-primary">
                     <tr>
                       <th>Topic</th>
-                      <th>Length</th>
-                      <th>messages</th>
+                      <th>Listened</th>
+                      <th>messages contained</th>
                       
                     </tr>
                   </thead>
                   <tbody>
-                    {mostConcurrentTopics.length > 0 ? (
-                     mostConcurrentTopics.map((topicData, index)=>(
-                    <tr key={index}>
-                    <td>{topicData.topic}</td>
-                    <td>{/* Add length data if available */}</td>
-                    <td>{topicData.count}</td>
-                    
-                  </tr>
-
-                  ))):(
-                    <tr>
-                      <td colSpan="4">No Topics found</td>
-                    </tr>
-                  )} 
+                  {mostConcurrentTopics.length > 0 ? (
+                      mostConcurrentTopics.map((topicData, index) => (
+                        <tr key={index}>
+                          <td>{topicData.topic}</td>
+                          <td>{topicData.count} x</td>
+                          <td>
+                            {topicMessagesMap[topicData.topic] &&
+                              Array.from(topicMessagesMap[topicData.topic]).map(
+                                (messageTitle, innerIndex) => (
+                                  <div key={innerIndex}>{messageTitle}</div>
+                                )
+                              )}
+                          </td>
+                        </tr>
+                      ))
+                    ) : (
+                      <tr>
+                        <td colSpan="3">No Topics found</td>
+                      </tr>
+                    )}
                   </tbody>
                 </Table>
               </CardBody>

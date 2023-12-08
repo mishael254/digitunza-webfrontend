@@ -78,6 +78,7 @@ CREATE TABLE projects (
 );
 
 /**adding data manually*/
-INSERT INTO projects
-       [ ( column_name [projectname] ) ]
-       VALUE ( value [uhalisi] );
+INSERT INTO members (id, firstname, lastname, email, phone, gender, age, occupation, category, latitude, longitude, location, project, group)
+VALUES 
+   
+    (2, 'Hufuxurd', 'Kinoti', 'hufuxudKinoti@gmail.com', '+254712719156', 'Male', 18, 'Finance', 'Member', '0.7935', '36.8573', 'SRID=4326;POINT (36.8219 1.3921)', 2, 4);
