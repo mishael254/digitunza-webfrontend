@@ -4,6 +4,8 @@ import React, {useState, useEffect} from "react";
 import classNames from "classnames";
 // react plugin used to create charts
 import { Line, Bar } from "react-chartjs-2";
+// skeleton loading screen
+import Skeleton from "react-loading-skeleton";
 
 // reactstrap components
 import {
@@ -36,10 +38,15 @@ import {
 import Api from "./Api";
 
 function Dashboard(props) {
-  const {members, feedbacks, deployments, messages, projects,statLogs } = Api();
+  
+  const {members, feedbacks, deployments, messages, projects,statLogs, isLoading } = Api();
   const [bigChartData, setbigChartData] = React.useState("data1");
   const [mostConcurrentTopics, setMostConcurrentTopics] = useState([]);
   const [topicMessagesMap, setTopicMessagesMap] = useState({});
+  const [uniqueCounties, setUniqueCounties] = useState(0);
+  const [uniqueGroups,setUniqueGroups] = useState(0);
+  const [uniqueOccupations, setUniqueOccupations] = useState(0);
+  const [uniqueProjects,setUniqueProjects] = useState(0);
   const setBgChartData = (name) => {
     setbigChartData(name);
   };
@@ -58,9 +65,61 @@ function Dashboard(props) {
 
   //generating dynamic data
   useEffect(() => {
-    // Extracting topics from statLogs
-    const topics = statLogs.map((log) => log.topic);
+    //extracting projects from statlogs
+    const projectNames = statLogs.map((log) =>log.project);
+    //filter blank field project in every object
+    const noEmptyProjects = projectNames.filter((project) => project);
+    //tokenize and normalize project names
+    const normalizedProjects = noEmptyProjects.map((project) =>
+    project.toLowerCase().split(/\s+/).join(" ")
+    );
+    // use a Set to get unique project names
+    const uniqueProjectsSet = new Set(normalizedProjects);
+    //update the state with the unique project count
+    setUniqueProjects(uniqueProjectsSet.size);
 
+    //extracting occupations from statlogs
+    const occupationNames = statLogs.map ((log) => log.occupation);
+    //filter blank field occupations in objects
+    const noEmptyOccupations = occupationNames.filter((occupation) => occupation);
+    //tokenize and normalize occupation names
+    const normalizedOccupations = noEmptyOccupations.map((occupation) =>
+    occupation.toLowerCase().split(/\s+/).join(" ")
+    );
+    //use a Set to get Unique occupation names
+    const uniqueOccupationsSet = new Set(normalizedOccupations);
+    //update state with the unique occupation count
+    setUniqueOccupations(uniqueOccupationsSet.size);
+
+    //extracting groups from statlogs
+    const groupNames = statLogs.map((log) => log.group);
+    //filter out any empty group fields or groups that have no names 
+    const noEmptyGroups = groupNames.filter((group) => group);
+    //tokenize and normalize group names
+    const normalizedGroups = noEmptyGroups.map((group) =>
+    group.toLowerCase().split(/\s+/).join(" ")
+    );
+    //use a Set to get unique group names
+    const uniqueGroupSet = new Set(normalizedGroups);
+    //update state with the unique group count
+    setUniqueGroups(uniqueGroupSet.size);
+   
+    //extracting counties from statlogs
+    const countyNames = statLogs.map((log) => log.county);
+    //filter out any county field that are empty or have been left out blank
+    const noEmptyCounties = countyNames.filter((county) => county);
+    //tokenize and normalize county names
+    const normalizedCounties = noEmptyCounties.map((county) =>
+    county.toLowerCase().split(/\s+/).join(" ")
+    );
+    // Use a Set to get unique county names
+    const uniqueCountySet = new Set(normalizedCounties);
+    // Update state with the unique county count
+
+    setUniqueCounties(uniqueCountySet.size);
+
+     // Extracting topics from statLogs
+    const topics = statLogs.map((log) => log.topic);
     // Counting occurrences of each topic
     const topicCounts = topics.reduce((acc, topic) => {
       acc[topic] = (acc[topic] || 0) + 1;
@@ -97,6 +156,7 @@ function Dashboard(props) {
     });
 
     setTopicMessagesMap(topicMessages);
+    
   }, [statLogs]);
 
   
@@ -205,131 +265,144 @@ function Dashboard(props) {
               </CardHeader>
               <CardBody>
                 <div className="chart-area">
-                  <Line
+                  {isLoading?(<Skeleton height={300}/>):(<Line
                     data={chartData}
                     options={chartOptions}
-                  />
+                  />)}
+                  
                 </div>
               </CardBody>
             </Card>
           </Col>
         </Row>
         <Row>
-        <div class="col-md-6 col-lg-3">
-          <div class="card-stats card">
-            <div class="card-body">
-              <div class="row">
-                <div class="col-5">
-                  <div class="info-icon text-center icon-warning">
-                  <div class = "custom-icon-container1">
-                    <i class="tim-icons icon-chat-33 custom-icon"></i>
+        <div className="col-md-6 col-lg-3">
+          <div className="card-stats card">
+            <div className="card-body">
+              <div className="row">
+                <div className="col-5">
+                  <div className="info-icon text-center icon-warning">
+                  <div className = "custom-icon-container1">
+                    <i className="tim-icons icon-chat-33 custom-icon"></i>
                     </div>
                   </div>
                 </div>
-              <div class="col-7">
-                <div class="numbers">
-                  <p class="card-category">Topics aired</p>
+              <div className="col-7">
+                {isLoading?(<Skeleton height={200} count={5} />):(
+                  <div className="numbers">
+                  <p className="card-category">Topics aired</p>
                   {messages.length > 0? (
                     <h3 className="card-title">{messages.length}</h3>
                   ):(
                     <h3 className="card-title">0</h3>
                   )}
                 </div>
+                )}
+                
               </div>
             </div>
           </div>
-          <div class="card-footer">
+          <div className="card-footer">
             
-            <div class="stats">
-              <i class="tim-icons icon-refresh-01"></i>
+            <div className="stats">
+              <i className="tim-icons icon-refresh-01"></i>
                Learn more
             </div>
             
           </div>
         </div>
         </div>
-        <div class="col-md-6 col-lg-3">
-          <div class="card-stats card">
-            <div class="card-body">
-              <div class="row">
-                <div class="col-5">
-                  <div class="info-icon text-center icon-primary">
-                  <div class = "custom-icon-container2">
-                    <i class="tim-icons icon-shape-star custom-icon"></i>
+        <div className="col-md-6 col-lg-3">
+          <div className="card-stats card">
+            <div className="card-body">
+              <div className="row">
+                <div className="col-5">
+                  <div className="info-icon text-center icon-primary">
+                  <div className = "custom-icon-container2">
+                    <i className="tim-icons icon-shape-star custom-icon"></i>
                     </div>
                   </div>
                 </div>
-                <div class="col-7">
-                  <div class="numbers">
-                    <p class="card-category">Counties</p>
-                    <h3 class="card-title">47</h3>
+                <div className="col-7">
+                  {isLoading? (<Skeleton height={200} count={5} />):(
+                    <div className="numbers">
+                    <p className="card-category">Counties</p>
+                    <h3 className="card-title">{uniqueCounties}</h3>
                   </div>
+                  )}
+                  
                 </div>
               </div>
             </div>
-            <div class="card-footer">
-              <div class="stats">
-                <i class="tim-icons icon-sound-wave"></i>
+            <div className="card-footer">
+              <div className="stats">
+                <i className="tim-icons icon-sound-wave"></i>
                  Counties Reached
               </div>
             </div>
           </div>
           </div>
-          <div class="col-md-6 col-lg-3">
-            <div class="card-stats card">
-              <div class="card-body">
-                <div class="row">
-                  <div class="col-5">
-                    <div class="info-icon text-center icon-success">
-                    <div class = "custom-icon-container3">
-                      <i class="tim-icons icon-single-02 custom-icon"></i>
+          <div className="col-md-6 col-lg-3">
+            <div className="card-stats card">
+              <div className="card-body">
+                <div className="row">
+                  <div className="col-5">
+                    <div className="info-icon text-center icon-success">
+                    <div className= "custom-icon-container3">
+                      <i className="tim-icons icon-single-02 custom-icon"></i>
                       </div>
                     </div>
                   </div>
-                  <div class="col-7">
-                    <div class="numbers">
-                      <p class="card-category">Members</p>
+                  <div className="col-7">
+                    {isLoading ? (<Skeleton height={200} count={5} />):(
+                      <div className="numbers">
+                      <p className="card-category">Members</p>
                       {members.length > 0? (
                     <h3 className="card-title">{members.length}</h3>
                   ):(
                     <h3 className="card-title">0</h3>
                   )}
                     </div>
+                    )}
+                    
                   </div>
                 </div>
               </div>
-              <div class="card-footer">
+              <div className="card-footer">
                 
-                <div class="stats">
-                  <i class="tim-icons icon-trophy"></i>
+                <div className="stats">
+                  <i className="tim-icons icon-trophy"></i>
                    Members registered
                 </div>
               </div>
             </div>
           </div>
-          <div class="col-md-6 col-lg-3">
-            <div class="card-stats card">
-              <div class="card-body">
-                <div class="row">
-                  <div class="col-5">
-                    <div class="info-icon text-center icon-danger">
-                      <div class = "custom-icon-container4">
-                      <i class="tim-icons icon-molecule-40 custom-icon"></i>
+          <div className="col-md-6 col-lg-3">
+            <div className="card-stats card">
+              <div className="card-body">
+                <div className="row">
+                  <div className="col-5">
+                    <div className="info-icon text-center icon-danger">
+                      <div className= "custom-icon-container4">
+                      <i className="tim-icons icon-molecule-40 custom-icon"></i>
                       </div>
                     </div>
                   </div>
-                  <div class="col-7">
-                    <div class="numbers">
-                      <p class="card-category">Groups</p>
-                      <h3 class="card-title">12</h3>
+                  <div className="col-7">
+                    {isLoading? (<Skeleton height={200} count={5} />):(
+                      <div className="numbers">
+                      <p className="card-category">Groups</p>
+                      <h3 className="card-title">{uniqueGroups}</h3>
                     </div>
+                    )}
+                    
                   </div>
                 </div>
               </div>
-              <div class="card-footer">
+              <div className="card-footer">
                
-                <div class="stats">
-                  <i class="tim-icons icon-watch-time"></i>
+                <div className="stats">
+                  <i className="tim-icons icon-watch-time"></i>
                    Online In the last hours
                 </div>
               </div>
@@ -344,7 +417,7 @@ function Dashboard(props) {
               <CardHeader>
                 <h5 className="card-category">Occupation Distribution</h5>
                 <CardTitle tag="h3">
-                  <i className="tim-icons icon-bell-55 text-info" /> 763,215
+                  <i className="tim-icons icon-bell-55 text-info" />{uniqueOccupations}
                 </CardTitle>
               </CardHeader>
               <CardBody>
@@ -362,8 +435,8 @@ function Dashboard(props) {
               <CardHeader>
                 <h5 className="card-category">Project Distribution</h5>
                 <CardTitle tag="h3">
-                  <i className="tim-icons icon-delivery-fast text-primary" />{" "}
-                  3,500
+                  <i className="tim-icons icon-delivery-fast text-primary" />{uniqueProjects}
+                  
                 </CardTitle>
               </CardHeader>
               <CardBody>
