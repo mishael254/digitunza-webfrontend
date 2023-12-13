@@ -24,7 +24,7 @@ const db = pgp(postgresConfig);
 app.get('/api/getMembers', async (req, res) => {
   try {
     // Attempt to fetch data from the external API
-    const apiEndpoint = 'http://tathmini.live:8000/api/member/';
+    const apiEndpoint = 'https://tathmini.live/api/member/';
     const response = await axios.get(apiEndpoint);
     //create table if there is none 
     await createTableIfNotExists('members', response.data);
@@ -69,7 +69,7 @@ app.get('/api/getMembers', async (req, res) => {
 app.get('/api/getDeployments', async (req, res) => {
   try {
     // Attempt to fetch data from the external API
-    const apiEndpoint = 'http://tathmini.live:8000/api/deployment/';
+    const apiEndpoint = 'http://tathmini.live/api/deployment/';
     const response = await axios.get(apiEndpoint);
     //create table if there is none 
     await createTableIfNotExists('deployments', response.data);
@@ -97,7 +97,7 @@ app.get('/api/getDeployments', async (req, res) => {
 app.get('/api/getStatlog', async (req, res) => {
   try {
     // Attempt to fetch data from the external API
-    const apiEndpoint = 'http://tathmini.live:8000/api/statlog/';
+    const apiEndpoint = 'http://tathmini.live/api/statlog/';
     const response = await axios.get(apiEndpoint);
     //create table if there is none 
     await createTableIfNotExists('statlogs', response.data);
@@ -126,7 +126,7 @@ app.get('/api/getStatlog', async (req, res) => {
 app.get('/api/getMessages', async (req, res) => {
   try {
     // Attempt to fetch data from the external API
-    const apiEndpoint = 'http://tathmini.live:8000/api/message/';
+    const apiEndpoint = 'http://tathmini.live/api/message/';
     const response = await axios.get(apiEndpoint);
     //create table if there is none 
     await createTableIfNotExists('messages', response.data);
@@ -153,7 +153,7 @@ app.get('/api/getMessages', async (req, res) => {
 app.get('/api/getPlaylist', async (req, res) => {
   try {
     // Attempt to fetch data from the external API
-    const apiEndpoint = 'http://tathmini.live:8000/api/playlist/';
+    const apiEndpoint = 'http://tathmini.live/api/playlist/';
     const response = await axios.get(apiEndpoint);
     //create table if there is none 
     await createTableIfNotExists('playlists', response.data);
@@ -180,7 +180,7 @@ app.get('/api/getPlaylist', async (req, res) => {
   app.get('/api/getProjects', async (req, res) => {
     try {
       // Attempt to fetch data from the external API
-      const apiEndpoint = 'http://tathmini.live:8000/api/project/';
+      const apiEndpoint = 'http://tathmini.live/api/project/';
       const response = await axios.get(apiEndpoint);
       //create table if there is none 
       await createTableIfNotExists('projects', response.data);
