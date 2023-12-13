@@ -2,7 +2,7 @@
 import axios from 'axios';
 import * as types from './Types';
 
-export const fetchMembers = () => async (dispatch) => {
+export const fetchMembersAction = () => async (dispatch) => {
   dispatch({ type: types.SET_LOADING, payload: true });
   try {
     const response = await axios.get('http://localhost:3001/api/getMembers');
@@ -14,7 +14,7 @@ export const fetchMembers = () => async (dispatch) => {
   }
 };
 
-export const fetchFeedbacks = () => async (dispatch) => {
+export const fetchFeedbacksAction = () => async (dispatch) => {
     dispatch({ type: types.SET_LOADING, payload: true });
     try {
       const response = await axios.get('http://localhost:3001/api/getFeedbacks');
@@ -26,7 +26,7 @@ export const fetchFeedbacks = () => async (dispatch) => {
     }
 };
 
-export const fetchDeployments = () => async (dispatch) => {
+export const fetchDeploymentsAction = () => async (dispatch) => {
     dispatch({ type: types.SET_LOADING, payload: true });
     try {
       const response = await axios.get('http://localhost:3001/api/getDeployments');
@@ -38,7 +38,7 @@ export const fetchDeployments = () => async (dispatch) => {
     }
 };
 
-export const fetchStatLogs = () => async (dispatch) => {
+export const fetchStatLogsAction = () => async (dispatch) => {
     dispatch({ type: types.SET_LOADING, payload: true });
     try {
       const response = await axios.get('http://localhost:3001/api/getStatLog');
@@ -50,7 +50,7 @@ export const fetchStatLogs = () => async (dispatch) => {
     }
 };
 
-export const fetchMessages = () => async (dispatch) => {
+export const fetchMessagesAction = () => async (dispatch) => {
     dispatch({ type: types.SET_LOADING, payload: true });
     try {
       const response = await axios.get('http://localhost:3001/api/getMessages');
@@ -62,7 +62,7 @@ export const fetchMessages = () => async (dispatch) => {
     }
 };
 
-export const fetchPlaylists = () => async (dispatch) => {
+export const fetchPlaylistsAction = () => async (dispatch) => {
     dispatch({ type: types.SET_LOADING, payload: true });
     try {
       const response = await axios.get('http://localhost:3001/api/getPlaylist');
@@ -74,7 +74,7 @@ export const fetchPlaylists = () => async (dispatch) => {
     }
 };
 
-export const fetchProjects = () => async (dispatch) => {
+export const fetchProjectsAction = () => async (dispatch) => {
     dispatch({ type: types.SET_LOADING, payload: true });
     try {
       const response = await axios.get('http://localhost:3001/api/getProjects');

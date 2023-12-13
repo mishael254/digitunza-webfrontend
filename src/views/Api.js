@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { fetchMembersAction,fetchFeedbacksAction, fetchDeploymentsAction, fetchStatLogsAction, fetchMessagesAction, fetchPlaylistsAction, fetchProjectsAction } from "../redux/Actions";
 
 function Api() {
+  const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(true);
   const [members, setMembers] = useState([]);
   const [feedbacks, setFeedbacks] = useState([]);
@@ -12,32 +15,32 @@ function Api() {
   const [projects, setProjects] = useState([]);
 
   useEffect(() => {
-    fetchMembers();
-  }, []);
+    dispatch(fetchMembersAction());
+  }, [dispatch]);
 
   useEffect(() => {
-    fetchFeedbacks();
-  }, []);
+    dispatch(fetchFeedbacksAction());
+  }, [dispatch]);
 
   useEffect(() => {
-    fetchDeployments();
-  }, []);
+    dispatch(fetchDeploymentsAction());
+  }, [dispatch]);
 
   useEffect(() => {
-    fetchStatLogs();
-  }, []);
+    dispatch(fetchStatLogsAction());
+  }, [dispatch]);
 
   useEffect(() => {
-    fetchMessages();
-  }, []);
+    dispatch(fetchMessagesAction());
+  }, [dispatch]);
 
   useEffect(() => {
-    fetchPlaylists();
-  }, []);
+    dispatch(fetchPlaylistsAction());
+  }, [dispatch]);
 
   useEffect(() => {
-    fetchProjects();
-  }, []);
+    dispatch(fetchProjectsAction());
+  }, [dispatch]);
 
   const fetchMembers = async () => {
     setIsLoading(true);
