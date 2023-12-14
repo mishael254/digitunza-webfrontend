@@ -6,7 +6,8 @@ import classNames from "classnames";
 import { Line, Bar } from "react-chartjs-2";
 // skeleton loading screen
 import Skeleton from "react-loading-skeleton";
-
+import { useSelector } from 'react-redux';
+//
 // reactstrap components
 import {
   Button,
