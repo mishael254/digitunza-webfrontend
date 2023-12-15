@@ -103,6 +103,8 @@ app.get('/api/getStatlog', async (req, res) => {
     await createTableIfNotExists('statlogs', response.data);
     // Save data to the database if API is reachable
     await saveDataToDatabase('statlogs', response.data);
+    // Update statlogs table with presentcounty and presentlocality
+    await updateStatlogsTableWithAddress();
   } catch (error) {
     console.error('Error fetching statlogs from API:', error);
 
@@ -230,6 +232,12 @@ app.get('/api/getPlaylist', async (req, res) => {
             ];
             columnDefinitions = [...basicColumns, ...additionalColumns];
           }
+          // Add additional columns for the 'statlogs' table
+          if (tableName === 'statlogs') {
+            const additionalColumns = ['presentcounty VARCHAR(255)', 'presentlocality VARCHAR(255)'];
+            columnDefinitions = [...basicColumns, ...additionalColumns];
+          }
+
     
           const createTableQuery = `CREATE TABLE IF NOT EXISTS ${tableName} (${columnDefinitions.join(', ')});`;
           await db.none(createTableQuery);
@@ -290,6 +298,16 @@ async function saveDataToDatabase(tableName, data) {
     console.error(`Error saving data to table "${tableName}":`, error);
   }
 }
+// Function to extract a specific address component from Geocoding API results
+function extractAddressComponent(addressComponents, type) {
+  for (const component of addressComponents) {
+    if (component.types.includes(type)) {
+      return component.long_name;
+    }
+  }
+  return null;
+}
+
 // Function to get county and locality from Google Geocoding API
 async function getAddressFromGeocodingAPI(latitude, longitude) {
   try {
@@ -298,13 +316,17 @@ async function getAddressFromGeocodingAPI(latitude, longitude) {
 
     const response = await axios.get(apiUrl);
 
+    // Check if there is a response, results, and address components
     if (response.data && response.data.results && response.data.results.length > 0) {
       const addressComponents = response.data.results[0].address_components;
 
-      const county = extractAddressComponent(addressComponents, 'administrative_area_level_1');
-      const locality = extractAddressComponent(addressComponents, 'locality');
+      // Check if address components are available
+      if (addressComponents) {
+        const county = extractAddressComponent(addressComponents, 'administrative_area_level_1');
+        const locality = extractAddressComponent(addressComponents, 'locality');
 
-      return { county, locality };
+        return { county, locality };
+      }
     }
 
     return { county: null, locality: null };
@@ -348,7 +370,40 @@ async function updateMembersTableWithAddress() {
   }
 }
 
-// Call the function to update members table with county and locality
+
+// Function to update statlogs table with presencounty and presentlocality
+async function updateStatlogsTableWithAddress() {
+  try {
+    // Fetch statlogs data from the database
+    const statlogsData = await db.any('SELECT * FROM statlogs');
+
+    // Loop through each statlog and update presencounty and presentlocality
+    for (const statlog of statlogsData) {
+      const { latitude, longitude } = statlog;
+
+      // Skip if latitude or longitude is missing
+      if (!latitude || !longitude) {
+        continue;
+      }
+
+      // Get presencounty and presentlocality from Geocoding API
+      const { county, locality } = await getAddressFromGeocodingAPI(latitude, longitude);
+
+      // Update statlogs table with presencounty and presentlocality
+      const updateQuery = `
+        UPDATE statlogs
+        SET presentcounty = $1, presentlocality = $2
+        WHERE id = $3;
+      `;
+
+      await db.none(updateQuery, [county, locality, statlog.id]);
+    }
+
+    console.log('Statlogs table updated with presentcounty and presentlocality.');
+  } catch (error) {
+    console.error('Error updating statlogs table with address:', error);
+  }
+}
 
 
 
