@@ -6,7 +6,7 @@ import classNames from "classnames";
 import { Line, Bar } from "react-chartjs-2";
 // skeleton loading screen
 import Skeleton from "react-loading-skeleton";
-import { useSelector } from 'react-redux';
+//import { useSelector } from 'react-redux';
 //
 // reactstrap components
 import {
@@ -184,8 +184,12 @@ function Dashboard(props) {
     scales: {
       yAxes: [{
         ticks: {
-          suggestedMin: 0,
-          suggestedMax: 1000,
+         beginAtZero: true,
+        },
+      }],
+      xAxes: [{
+        gridLines: {
+          display: true,
         },
       }],
     },
