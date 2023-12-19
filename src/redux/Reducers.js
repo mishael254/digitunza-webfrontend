@@ -19,30 +19,37 @@ const appSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchMembersAction.fulfilled, (state, action) => {
       state.members = action.payload;
+      state.isLoading = false;
       return state;
     });
     builder.addCase(fetchDeploymentsAction.fulfilled, (state, action) => {
       state.deployments = action.payload;
+      state.isLoading = false;
       return state;
     });
     builder.addCase(fetchFeedbacksAction.fulfilled, (state, action) => {
       state.feedbacks = action.payload;
+      state.isLoading = false;
       return state;
     });
     builder.addCase(fetchMessagesAction.fulfilled, (state, action) => {
       state.messages = action.payload;
+      state.isLoading = false;
       return state;
     });
     builder.addCase(fetchStatLogsAction.fulfilled, (state, action) => {
       state.statLogs = action.payload;
+      state.isLoading = false;
       return state;
     });
     builder.addCase(fetchProjectsAction.fulfilled, (state, action) => {
       state.projects = action.payload;
+      state.isLoading = false;
       return state;
     });
     builder.addCase(fetchPlaylistsAction.fulfilled, (state, action) => {
       state.playlists = action.payload;
+      state.isLoading = false;
       return state;
     });
     
