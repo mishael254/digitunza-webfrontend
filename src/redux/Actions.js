@@ -1,14 +1,16 @@
 
 import axios from 'axios';
-import * as types from './Types';
+//import * as types from './Types';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { fetchMembersSuccess, setLoading,fetchFeedbacksSuccess,fetchDeploymentsSuccess,fetchMessagesSuccess,fetchPlaylistsSuccess,fetchProjectsSuccess,fetchStatLogsSuccess } from './Reducers';
+
 
 
 export const fetchMembersAction = createAsyncThunk('app/fetchMembers', async () => {
   try {
     const response = await axios.get('http://localhost:3001/api/getMembers');
     return response.data;
+    console.log("Members data:", response.data);
+    
   } catch (error) {
     console.error('Error fetching members:', error);
     throw error; // Propagate the error
