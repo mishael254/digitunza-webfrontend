@@ -65,7 +65,7 @@ CREATE TABLE messages (
     playlist INTEGER,
     language INTEGER
 );
-CREATE TABLE IF NOT EXISTS lessons (
+CREATE TABLE IF NOT EXISTS playlists (
     id SERIAL PRIMARY KEY,
     title VARCHAR(255),
     playlist INTEGER,
