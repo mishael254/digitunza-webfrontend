@@ -1,4 +1,4 @@
-
+// eslint-disable-next-line
 import axios from 'axios';
 //import * as types from './Types';
 import { createAsyncThunk } from '@reduxjs/toolkit';
@@ -9,7 +9,7 @@ export const fetchMembersAction = createAsyncThunk('app/fetchMembers', async () 
   try {
     const response = await axios.get('http://localhost:3002/api/getMembers');
     return response.data;
-    console.log("Members data:", response.data);
+    //console.log("Members data:", response.data);
     
   } catch (error) {
     console.error('Error fetching members:', error);
