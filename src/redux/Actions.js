@@ -7,7 +7,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 export const fetchMembersAction = createAsyncThunk('app/fetchMembers', async () => {
   try {
-    const response = await axios.get('http://localhost:3001/api/getMembers');
+    const response = await axios.get('http://localhost:3002/api/getMembers');
     return response.data;
     console.log("Members data:", response.data);
     
@@ -20,7 +20,7 @@ export const fetchMembersAction = createAsyncThunk('app/fetchMembers', async () 
 
 export const fetchFeedbacksAction = createAsyncThunk('app/fetchFeedbacks', async () => {
   try {
-    const response = await axios.get('http://localhost:3001/api/getFeedbacks');
+    const response = await axios.get('http://localhost:3002/api/getFeedbacks');
     return response.data;
   } catch (error) {
     console.error('Error fetching feedbacks:', error);
@@ -31,7 +31,7 @@ export const fetchFeedbacksAction = createAsyncThunk('app/fetchFeedbacks', async
 
 export const fetchDeploymentsAction = createAsyncThunk('app/fetchDeployments', async () => {
   try {
-    const response = await axios.get('http://localhost:3001/api/getDeployments');
+    const response = await axios.get('http://localhost:3002/api/getDeployments');
     return response.data;
   } catch (error) {
     console.error('Error fetching Deployments:', error);
@@ -43,7 +43,7 @@ export const fetchDeploymentsAction = createAsyncThunk('app/fetchDeployments', a
 
 export const fetchStatLogsAction = createAsyncThunk('app/fetchStatlogs', async () => {
   try {
-    const response = await axios.get('http://localhost:3001/api/getStatlog');
+    const response = await axios.get('http://localhost:3002/api/getStatlog');
     return response.data;
   } catch (error) {
     console.error('Error fetching Statlogs:', error);
@@ -55,7 +55,7 @@ export const fetchStatLogsAction = createAsyncThunk('app/fetchStatlogs', async (
 
 export const fetchMessagesAction = createAsyncThunk('app/fetchMessages', async () => {
   try {
-    const response = await axios.get('http://localhost:3001/api/getMessages');
+    const response = await axios.get('http://localhost:3002/api/getMessages');
     return response.data;
   } catch (error) {
     console.error('Error fetching messages:', error);
@@ -67,7 +67,7 @@ export const fetchMessagesAction = createAsyncThunk('app/fetchMessages', async (
 
 export const fetchPlaylistsAction = createAsyncThunk('app/fetchPlaylists', async () => {
   try {
-    const response = await axios.get('http://localhost:3001/api/getPlaylist');
+    const response = await axios.get('http://localhost:3002/api/getPlaylist');
     return response.data;
   } catch (error) {
     console.error('Error fetching playlists:', error);
@@ -78,7 +78,7 @@ export const fetchPlaylistsAction = createAsyncThunk('app/fetchPlaylists', async
 
 export const fetchProjectsAction = createAsyncThunk('app/fetchProjects', async () => {
   try {
-    const response = await axios.get('http://localhost:3001/api/getProjects');
+    const response = await axios.get('http://localhost:3002/api/getProjects');
     return response.data;
   } catch (error) {
     console.error('Error fetching Projects:', error);

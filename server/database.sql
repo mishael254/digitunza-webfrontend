@@ -65,7 +65,7 @@ CREATE TABLE messages (
     playlist INTEGER,
     language INTEGER
 );
-CREATE TABLE IF NOT EXISTS lessons (
+CREATE TABLE IF NOT EXISTS playlists (
     id SERIAL PRIMARY KEY,
     title VARCHAR(255),
     playlist INTEGER,
@@ -74,9 +74,32 @@ CREATE TABLE IF NOT EXISTS lessons (
 
 CREATE TABLE projects (
     id SERIAL PRIMARY KEY,
-    projectname VARCHAR(255)
+    projectName VARCHAR(255) NOT NULL,
+    levelThreeCategory VARCHAR(255),
+    levelFourCategory VARCHAR(255),
+    levelFiveCategory VARCHAR(255),
+    levelSixCategory VARCHAR(255),
+    zone VARCHAR(255) NOT NULL,
+    startDate DATE NOT NULL,
+    endDate DATE NOT NULL,
+    groupNo INTEGER,
+    mode VARCHAR(50) NOT NULL,
+    grouped BOOLEAN NOT NULL,
+    anthem VARCHAR(255),
+    theme VARCHAR(255),
+    partner INTEGER NOT NULL,
+    category INTEGER NOT NULL,
+    subcategory INTEGER,
+    countries INTEGER[],
+    counties INTEGER[]
 );
+ALTER TABLE statlogs
+ADD COLUMN presentcounty VARCHAR(255),
+ADD COLUMN presentlocality VARCHAR(255);
 
+ALTER TABLE members
+ADD COLUMN county VARCHAR(255),
+ADD COLUMN locality VARCHAR(255);
 /**adding data manually*/
 INSERT INTO members (id, firstname, lastname, email, phone, gender, age, occupation, category, latitude, longitude, location, project, group)
 VALUES 

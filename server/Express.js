@@ -5,7 +5,7 @@ const axios = require('axios');
 const pgp = require('pg-promise')();
 
 const app = express();
-const port = 3001;
+const port = 3002;
 
 
 app.use(bodyParser.json());
