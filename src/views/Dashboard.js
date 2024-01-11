@@ -7,7 +7,7 @@ import { Line, Bar } from "react-chartjs-2";
 // skeleton loading screen
 import Skeleton from "react-loading-skeleton";
 //import { useSelector } from 'react-redux';
-//
+import OccupationLineGraph from "../variables/Occupation";
 // reactstrap components
 import {
   Button,
@@ -32,7 +32,7 @@ import {
 // core components
 import {
   //chartExample1,
-  chartExample2,
+  //chartExample2,
   chartExample3,
   chartExample4,
 } from "variables/charts.js";
@@ -65,20 +65,9 @@ function Dashboard(props) {
 
   const projectNames = projects.map((project) => project.projectname);
 
-  //function to calculate occupation counts
-  const calculateOccupationCounts = (normalizedMemberOccupations) => {
-    const occupationCounts = {};
+ 
 
-    normalizedMemberOccupations.forEach((occupation) =>{
-      
-      if (occupationCounts[occupation]){
-        occupationCounts[occupation]++;
-      } else {
-        occupationCounts[occupation] = 1;
-      }
-    });
-    return occupationCounts;
-  }
+
   //generating dynamic data
   useEffect(() => {
     //extracting projects from statlogs
@@ -109,6 +98,9 @@ function Dashboard(props) {
     const uniquemembersOccupationsSet = new Set(normalizedMemberOccupations);
     //update state with the unique occupation count
     setUniqueOccupationInMembers(uniquemembersOccupationsSet.size);
+    // Calculate occupation counts
+   
+    
 
     //extracting occupations from statlogs
     const occupationNames = statLogs.map ((log) => log.occupation);
@@ -190,7 +182,8 @@ function Dashboard(props) {
     setTopicMessagesMap(topicMessages);
     
   }, [members, statLogs]);
-
+  // Calculate occupation counts
+ 
   const chartData = {
     labels: projectNames,
     datasets:[
@@ -223,7 +216,9 @@ function Dashboard(props) {
     },
     // ... (other options)
   };
+ 
 
+ 
   return (
     <>
       <div className="content">
@@ -455,10 +450,7 @@ function Dashboard(props) {
               </CardHeader>
               <CardBody>
                 <div className="chart-area">
-                  <Line
-                    data={chartExample2.data}
-                    options={chartExample2.options}
-                  />
+                <OccupationLineGraph members={members} />
                 </div>
               </CardBody>
             </Card>
