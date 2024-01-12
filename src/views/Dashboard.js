@@ -37,6 +37,7 @@ import {
   chartExample4,
 } from "variables/charts.js";
 import Api from "./Api";
+import ZoneBarGraph from "variables/ZoneBarGraph";
 
 function Dashboard(props) {
   
@@ -466,10 +467,7 @@ function Dashboard(props) {
               </CardHeader>
               <CardBody>
                 <div className="chart-area">
-                  <Bar
-                    data={chartExample3.data}
-                    options={chartExample3.options}
-                  />
+                  <ZoneBarGraph projects={projects}/>
                 </div>
               </CardBody>
             </Card>

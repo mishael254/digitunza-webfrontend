@@ -9,7 +9,7 @@ function OccupationLineGraph() {
     labels: [],
     datasets: [
       {
-        label: "Occupation Distribution",
+        label: "Occupation member Distribution",
         fill: true,
         lineTension: 0.1,
         backgroundColor: "rgba(75,192,192,0.4)",
@@ -47,7 +47,7 @@ function OccupationLineGraph() {
       datasets: [
         {
           ...prevData.datasets[0],
-          label: "Occupation Distribution",
+          label: "members Active",
           fill: true,
           backgroundColor: "rgba(29,140,248,0.2)",
           borderColor: "#1f8ef1",
