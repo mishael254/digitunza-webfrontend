@@ -3,7 +3,7 @@ import React, {useState, useEffect} from "react";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // react plugin used to create charts
-import { Line, Bar } from "react-chartjs-2";
+import { Line } from "react-chartjs-2";
 // skeleton loading screen
 import Skeleton from "react-loading-skeleton";
 //import { useSelector } from 'react-redux';
@@ -33,7 +33,7 @@ import {
 import {
   //chartExample1,
   //chartExample2,
-  chartExample3,
+  //chartExample3,
   chartExample4,
 } from "variables/charts.js";
 import Api from "./Api";

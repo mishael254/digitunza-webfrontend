@@ -8,14 +8,24 @@ function ZoneBarGraph() {
 
   // State to store zone data
   const [zoneData, setZoneData] = useState({
-    
     labels: [],
+    tooltips: {
+      backgroundColor: "#f5f5f5",
+      titleFontColor: "#333",
+      bodyFontColor: "#666",
+      bodySpacing: 4,
+      xPadding: 12,
+      mode: "nearest",
+      intersect: 0,
+      position: "nearest",
+    },
+    responsive: true,
     datasets: [
       {
-        label: "Zone Distribution",
+        label: "Projects ",
         fill: true,
-        backgroundColor: gradientStroke,
-        hoverBackgroundColor: gradientStroke,
+        backgroundColor: "rgba(119,52,169,0)",
+        hoverBackgroundColor:"#d048b6",
         borderColor: "#d048b6",
         borderWidth: 2,
         borderDash: [],
@@ -33,6 +43,9 @@ function ZoneBarGraph() {
       return acc;
     }, {});
 
+    // Find the maximum occurrences
+    const maxOccurrences = Math.max(...Object.values(zoneCounts));
+
     // Update state with zone data
     setZoneData((prevData) => ({
       ...prevData,
@@ -40,25 +53,38 @@ function ZoneBarGraph() {
       datasets: [
         {
           ...prevData.datasets[0],
+          
           data: Object.values(zoneCounts),
         },
       ],
     }));
+
+    // Set the y-axis max dynamically based on the maximum occurrences
+    setYAxisMax(maxOccurrences);
   }, [projects]);
+
+  const setYAxisMax = (max) => {
+    // Update the chart options with the dynamic y-axis max
+    setZoneData((prevData) => ({
+      ...prevData,
+      responsive: true,
+      options: {
+        scales: {
+          y: {
+            drawBorder: false,
+            beginAtZero: true,
+            color: "rgba(225,78,202,0.1)",
+            zeroLineColor: "transparent",
+            max: max,
+          },
+        },
+      },
+    }));
+  };
 
   return (
     <div className="chart-area">
-      <Bar
-        data={zoneData}
-        options={{
-          scales: {
-            y: {
-              beginAtZero: true,
-              max: 10, // Adjust the max value based on your data
-            },
-          },
-        }}
-      />
+      <Bar data={zoneData} options={zoneData.options} />
     </div>
   );
 }
