@@ -8,6 +8,8 @@ import { Line } from "react-chartjs-2";
 import Skeleton from "react-loading-skeleton";
 //import { useSelector } from 'react-redux';
 import OccupationLineGraph from "../variables/Occupation";
+import DeploymentLineGraph from "variables/DeploymentsGraph";
+import MembersProjectsGraph from "variables/MembersProjectGraph";
 // reactstrap components
 import {
   Button,
@@ -34,7 +36,7 @@ import {
   //chartExample1,
   //chartExample2,
   //chartExample3,
-  chartExample4,
+  //chartExample4,
 } from "variables/charts.js";
 import Api from "./Api";
 import ZoneBarGraph from "variables/ZoneBarGraph";
@@ -52,23 +54,12 @@ function Dashboard(props) {
   const [uniqueProjects,setUniqueProjects] = useState(0);
   const setBgChartData = (name) => {
     setbigChartData(name);
-  };
+ };
 
   //extracting member data
   //const memberLabels = members.map((member)=>member.firstname);
   //const memberData = members.map((member) => member.project ? 1000 : 0)
-  const membersCountByProject = projects.map((project) => {
-    const count = members.filter((member) => member.project === project.id).length;
-    return count;
-  });
-
-  //extracting project names
-
-  const projectNames = projects.map((project) => project.projectname);
-
  
-
-
   //generating dynamic data
   useEffect(() => {
     //extracting projects from statlogs
@@ -185,40 +176,6 @@ function Dashboard(props) {
   }, [members, statLogs]);
   // Calculate occupation counts
  
-  const chartData = {
-    labels: projectNames,
-    datasets:[
-      {
-        label: "Per project",
-        fill: true,
-        backgroundColor: "rgba(29,140,248,0.2)",
-        borderColor: "#1f8ef1",
-        borderWidth: 2,
-        data: membersCountByProject,
-      },
-    ],
-  };
-  const chartOptions = {
-    maintainAspectRatio: false,
-    legend: {
-      display: false,
-    },
-    scales: {
-      yAxes: [{
-        ticks: {
-         beginAtZero: true,
-        },
-      }],
-      xAxes: [{
-        gridLines: {
-          display: true,
-        },
-      }],
-    },
-    // ... (other options)
-  };
- 
-
  
   return (
     <>
@@ -292,14 +249,8 @@ function Dashboard(props) {
                   </Col>
                 </Row>
               </CardHeader>
-              <CardBody>
-                <div className="chart-area">
-                  {isLoading?(<Skeleton height={300}/>):(<Line
-                    data={chartData}
-                    options={chartOptions}
-                  />)}
-                  
-                </div>
+              <CardBody> <div ><MembersProjectsGraph /></div>
+                
               </CardBody>
             </Card>
           </Col>
@@ -450,7 +401,7 @@ function Dashboard(props) {
                 </CardTitle>
               </CardHeader>
               <CardBody>
-                <div className="chart-area">
+                <div>
                 <OccupationLineGraph members={members} />
                 </div>
               </CardBody>
@@ -466,7 +417,7 @@ function Dashboard(props) {
                 </CardTitle>
               </CardHeader>
               <CardBody>
-                <div className="chart-area">
+                <div>
                   <ZoneBarGraph projects={projects}/>
                 </div>
               </CardBody>
@@ -490,11 +441,8 @@ function Dashboard(props) {
                 </CardTitle>
               </CardHeader>
               <CardBody>
-                <div className="chart-area">
-                  <Line
-                    data={chartExample4.data}
-                    options={chartExample4.options}
-                  />
+                <div>
+                  <DeploymentLineGraph deployments={deployments}/>
                 </div>
               </CardBody>
             </Card>

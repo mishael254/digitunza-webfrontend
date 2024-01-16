@@ -34,6 +34,28 @@ function ZoneBarGraph() {
       },
     ],
   });
+  // Chart options
+const chartOptions = {
+  maintainAspectRatio: false,
+  legend: {
+    display: false,
+  },
+  scales: {
+    y: {
+      beginAtZero: true,
+      ticks: {
+        autoSkip: true,
+        maxTicksLimit: 10,
+      },
+    },
+    x: {
+      gridLines: {
+        display: true,
+      },
+    },
+  },
+};
+
 
   // useEffect to calculate zone occurrences
   useEffect(() => {
@@ -84,7 +106,7 @@ function ZoneBarGraph() {
 
   return (
     <div className="chart-area">
-      <Bar data={zoneData} options={zoneData.options} />
+      <Bar data={zoneData} options={chartOptions} />
     </div>
   );
 }

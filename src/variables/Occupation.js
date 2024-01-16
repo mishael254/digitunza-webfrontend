@@ -32,6 +32,29 @@ function OccupationLineGraph() {
     ],
   });
 
+  // Chart options
+const chartOptions = {
+  maintainAspectRatio: false,
+  legend: {
+    display: false,
+  },
+  scales: {
+    y: {
+      beginAtZero: true,
+      ticks: {
+        autoSkip: true,
+        maxTicksLimit: 10,
+      },
+    },
+    x: {
+      gridLines: {
+        display: true,
+      },
+    },
+  },
+};
+
+
   // useEffect to calculate occupation occurrences
   useEffect(() => {
     const occupationCounts = members.reduce((acc, member) => {
@@ -61,7 +84,7 @@ function OccupationLineGraph() {
   return (
     <div className="chart-area">
       
-      <Line data={occupationData} />
+      <Line data={occupationData} options={chartOptions} />
     </div>
   );
 }
