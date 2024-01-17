@@ -10,6 +10,8 @@ import Skeleton from "react-loading-skeleton";
 import OccupationLineGraph from "../variables/Occupation";
 import DeploymentLineGraph from "variables/DeploymentsGraph";
 import MembersProjectsGraph from "variables/MembersProjectGraph";
+import MembersAgeGraph from "variables/MembersAgeGraph";
+import MembersCountiesGraph from "variables/MembersCountiesGraph";
 // reactstrap components
 import {
   Button,
@@ -52,14 +54,26 @@ function Dashboard(props) {
   const [uniqueOccupations, setUniqueOccupations] = useState(0);
   const [uniqueOccupationInMembers,setUniqueOccupationInMembers] = useState(0);
   const [uniqueProjects,setUniqueProjects] = useState(0);
+  const [activeChart, setActiveChart] = React.useState("projects");
   const setBgChartData = (name) => {
     setbigChartData(name);
  };
-
-  //extracting member data
-  //const memberLabels = members.map((member)=>member.firstname);
-  //const memberData = members.map((member) => member.project ? 1000 : 0)
+  
  
+
+  //conditionally assigning the selected component based on the button clicked
+ const handleButtonClick = (chartType) => {
+  setActiveChart(chartType);
+ };
+ //Defining a variable to hold the selected Graph component
+ let SelectedGraph;
+ if (activeChart === "projects") {
+   SelectedGraph = <MembersProjectsGraph/>
+ }else if (activeChart === "counties") {
+   SelectedGraph = <MembersCountiesGraph/>
+ }else if (activeChart === "age") {
+   SelectedGraph = <MembersAgeGraph/>
+ }
   //generating dynamic data
   useEffect(() => {
     //extracting projects from statlogs
@@ -197,12 +211,12 @@ function Dashboard(props) {
                       <Button
                         tag="label"
                         className={classNames("btn-simple", {
-                          active: bigChartData === "data1",
+                          active: activeChart === "projects",
                         })}
                         color="info"
                         id="0"
                         size="sm"
-                        onClick={() => setBgChartData("data1")}
+                        onClick={() => handleButtonClick("projects")}
                       >
                         <span className="d-none d-sm-block d-md-block d-lg-block d-xl-block">
                           Projects
@@ -217,9 +231,9 @@ function Dashboard(props) {
                         size="sm"
                         tag="label"
                         className={classNames("btn-simple", {
-                          active: bigChartData === "data2",
+                          active: activeChart === "counties",
                         })}
-                        onClick={() => setBgChartData("data2")}
+                        onClick={() => handleButtonClick("counties")}
                       >
                         <span className="d-none d-sm-block d-md-block d-lg-block d-xl-block">
                           Counties
@@ -234,9 +248,9 @@ function Dashboard(props) {
                         size="sm"
                         tag="label"
                         className={classNames("btn-simple", {
-                          active: bigChartData === "data3",
+                          active: activeChart === "age",
                         })}
-                        onClick={() => setBgChartData("data3")}
+                        onClick={() => handleButtonClick("age")}
                       >
                         <span className="d-none d-sm-block d-md-block d-lg-block d-xl-block">
                           Age
@@ -249,7 +263,8 @@ function Dashboard(props) {
                   </Col>
                 </Row>
               </CardHeader>
-              <CardBody> <div ><MembersProjectsGraph /></div>
+              <CardBody>
+                 <div >{SelectedGraph}</div>
                 
               </CardBody>
             </Card>
