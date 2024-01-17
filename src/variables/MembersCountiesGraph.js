@@ -6,6 +6,9 @@ import Api from "views/Api";
 const MembersCountiesGraph = () => {
   const { members } = Api();
 
+  // Filter out members with null values in the county field
+  const filteredCounties = members.filter((member) => member.county !== null);
+
   // Initialize state for chart data
   const [chartData, setChartData] = useState({
     labels: [],
@@ -21,31 +24,6 @@ const MembersCountiesGraph = () => {
       },
     ],
   });
-
-  useEffect(() => {
-    // Map county names and corresponding member counts
-    const countyNames = Array.from(new Set(members.map((member) => member.county)));
-    const membersCountByCounty = countyNames.map((county) =>
-      members.filter((member) => member.county === county).length
-    );
-
-    // Update chart data state
-    setChartData((prevData) => ({
-      ...prevData,
-      labels: countyNames,
-      datasets: [
-        {
-          ...prevData.datasets[0],
-          fill: true,
-          backgroundColor: "rgba(29,140,248,0.2)",
-          borderColor: "#1f8ef1",
-          borderWidth: 2,
-          data: membersCountByCounty,
-        },
-      ],
-    }));
-  }, [members]);
-
   // Chart options
   const chartOptions = {
     maintainAspectRatio: false,
@@ -68,8 +46,34 @@ const MembersCountiesGraph = () => {
     },
   };
 
+  useEffect(() => {
+    // Map county names and corresponding member counts
+    const countyNames = Array.from(new Set(filteredCounties.map((member) => member.county)));
+    const membersCountByCounty = countyNames.map((county) =>
+      filteredCounties.filter((member) => member.county === county).length
+    );
+
+    // Update chart data state
+    setChartData((prevData) => ({
+      ...prevData,
+      labels: countyNames,
+      datasets: [
+        {
+          ...prevData.datasets[0],
+          fill: true,
+          backgroundColor: "rgba(29,140,248,0.2)",
+          borderColor: "#1f8ef1",
+          borderWidth: 2,
+          data: membersCountByCounty,
+        },
+      ],
+    }));
+  }, []);
+
+  
+
   return (
-    <div className="chart-area" >
+    <div className="chart-area">
       <Line data={chartData} options={chartOptions} />
     </div>
   );
