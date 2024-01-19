@@ -541,3 +541,11 @@ Created using IcoMoon - icomoon.io
 .icon-components::before {
   content: "\ea65";
 }
+
+.progress-container.progress-sm .progress .progress-value {
+  position: absolute;
+  top: 50%;
+  left: 65%;
+  color: #fff;
+  font-size: .62475rem;
+}
