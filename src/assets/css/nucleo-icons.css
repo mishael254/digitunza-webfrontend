@@ -548,4 +548,16 @@ Created using IcoMoon - icomoon.io
   left: 65%;
   color: #fff;
   font-size: .62475rem;
+  transform: translate(-50%, -50%);
+  font-size: 0.62475rem;
+  transition: opacity 1s ease-in-out; /* Add transition for opacity */
 }
+.progress-bar-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-bar-filling {
+  transition: width 1s ease-in-out;
+}
+
