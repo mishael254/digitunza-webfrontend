@@ -3,7 +3,7 @@ import React, {useState, useEffect} from "react";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 // react plugin used to create charts
-import { Line } from "react-chartjs-2";
+//import { Line } from "react-chartjs-2";
 // skeleton loading screen
 import Skeleton from "react-loading-skeleton";
 //import { useSelector } from 'react-redux';
@@ -42,6 +42,7 @@ import {
 } from "variables/charts.js";
 import Api from "./Api";
 import ZoneBarGraph from "variables/ZoneBarGraph";
+import { object } from "prop-types";
 
 function Dashboard(props) {
   
@@ -55,6 +56,8 @@ function Dashboard(props) {
   const [uniqueOccupationInMembers,setUniqueOccupationInMembers] = useState(0);
   const [uniqueProjects,setUniqueProjects] = useState(0);
   const [activeChart, setActiveChart] = React.useState("projects");
+  const [topicProgress, setTopicProgress] = useState([]);
+  const [uniqueCountiesCount, setUniqueCountiesCount] = useState(0); // Initialize to 0
   const setBgChartData = (name) => {
     setbigChartData(name);
  };
@@ -186,8 +189,32 @@ function Dashboard(props) {
     });
 
     setTopicMessagesMap(topicMessages);
+
+    const uniqueCounties = new Set(statLogs.map((log) => log.presentcounty));
+    setUniqueCountiesCount(uniqueCounties.size);
+//calculating the progress so as to display it in the progress bar 
+//this time i am using to show progress of the topics appearing in counties {presentCounties}
+const progressGroupedByTopic = statLogs.reduce((acc, log) => {
+  if (!acc[log.topic]) {
+    acc[log.topic] = [];
+  }
+  acc[log.topic].push(log);
+  return acc;
+}, {});
+
+// now calculate progress for each topic
+const progressData = Object.keys(progressGroupedByTopic).map((topic) => {
+  const logsForTopic = progressGroupedByTopic[topic];
+  const nonNullCounties = logsForTopic.filter((log) => log.presentcounty !== null);
+  const uniqueCounties = new Set(nonNullCounties.map((log) => log.presentcounty));
+  const progress = (uniqueCounties.size / uniqueCountiesCount) * 100;
+  return { topic, progress };
+});
+
+setTopicProgress(progressData);
+
     
-  }, [members, statLogs]);
+  }, [members, statLogs, uniqueCountiesCount]);
   // Calculate occupation counts
  
  
@@ -567,11 +594,10 @@ function Dashboard(props) {
                       <th>messages contained</th>
                       <th>Progress</th>
                       <th>actions</th>
-                      
                     </tr>
                   </thead>
                   <tbody>
-                  {mostConcurrentTopics.length > 0 ? (
+                    {mostConcurrentTopics.length > 0 ? (
                       mostConcurrentTopics.map((topicData, index) => (
                         <tr key={index}>
                           <td>{topicData.topic}</td>
@@ -585,18 +611,47 @@ function Dashboard(props) {
                               )}
                           </td>
                           <td>
-                            <div className="progress-container progress-sm">
-                              <div className="progress">
-                              <span className="progress-value">25%</span>
-                                  <div className="progress-bar" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style={{width: '50%'}}></div>
-                              </div>
-                            </div>
+                            {topicProgress.map((progressData, progressIndex) => {
+                              if (progressData.topic === topicData.topic) {
+                                return (
+                                  <div
+                                    key={progressIndex}
+                                    className="progress-container progress-sm"
+                                  >
+                                    <div className="progress">
+                                      <span className="progress-value">{`${progressData.progress.toFixed(
+                                        2
+                                      )}%`}</span>
+                                      <div
+                                        className="progress-bar"
+                                        role="progressbar"
+                                        aria-valuenow={progressData.progress}
+                                        aria-valuemin="0"
+                                        aria-valuemax="100"
+                                        style={{ width: `${progressData.progress}%` }}
+                                      ></div>
+                                    </div>
+                                  </div>
+                                );
+                              }
+                              return null;
+                            })}
                           </td>
                           <td>
-                            <button type="button" id="tooltip30547133" title="Refresh" className="btn-link btn-icon btn btn-success btn-sm">
+                            <button
+                              type="button"
+                              id={`tooltipRefresh_${index}`}
+                              title="Refresh"
+                              className="btn-link btn-icon btn btn-success btn-sm"
+                            >
                               <i className="tim-icons icon-refresh-01"></i>
                             </button>
-                            <button type="button" id="tooltip156899243" title="Delete" className="btn-link btn-icon btn btn-danger btn-sm">
+                            <button
+                              type="button"
+                              id={`tooltipDelete_${index}`}
+                              title="Delete"
+                              className="btn-link btn-icon btn btn-danger btn-sm"
+                            >
                               <i className="tim-icons icon-simple-remove"></i>
                             </button>
                           </td>
@@ -612,7 +667,7 @@ function Dashboard(props) {
               </CardBody>
             </Card>
           </Col>
-          
+
         </Row>
       </div>
     </>
