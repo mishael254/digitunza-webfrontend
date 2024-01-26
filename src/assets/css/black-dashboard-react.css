@@ -17382,7 +17382,7 @@ hr {
   margin-bottom: 50px;
 }
 
-.perfect-scrollbar-on .main-panel {
+.perfect-scrollbar-on .main-panel .perfect-scrollbar-on .sidebar{
   height: 100%;
   max-height: 100%;
 }

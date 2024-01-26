@@ -3,6 +3,8 @@
  */
 .ps {
   overflow: hidden !important;
+  overflow-x: hidden !important;
+  overflow-y: hidden !important;
   overflow-anchor: none;
   -ms-overflow-style: none;
   touch-action: auto;
