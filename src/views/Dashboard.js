@@ -670,91 +670,91 @@ setTopicProgress(progressData);
             </Card>
           </Col>
 {/**div to experiment on maps and svgs */}
-          <div class="col-lg-12">
-            <div class="card">
-              <div class="card-header">
-                <h4 class="card-title">Top counties with projects running</h4>
-                <p class="card-category">Currently online counties</p>
+          <div className="col-lg-12">
+            <div className="card">
+              <div className="card-header">
+                <h4 className="card-title">Top counties with projects running</h4>
+                <p className="card-category">Currently online counties</p>
               </div>
-              <div class="card-body">
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="table-responsive ps">
-                      <table class="table">
+              <div className="card-body">
+                <div className="row">
+                  <div className="col-md-6">
+                    <div className="table-responsive ps">
+                      <table className="table">
                         <tbody>
                           <tr>
                             <td>
-                              <div class="flag">
+                              <div className="flag">
                                 <img alt="..." src=""/>
                               </div>
                             </td>
                             <td>Nandi County</td>
-                            <td class="text-right">2.920</td>
-                            <td class="text-right">53.23%</td>
+                            <td className="text-right">2.920</td>
+                            <td className="text-right">53.23%</td>
                           </tr>
                           <tr>
                             <td>
-                              <div class="flag">
+                              <div className="flag">
                                 <img alt="..." src=""/>
                               </div>
                             </td>
                             <td>Nyeri county</td>
-                            <td class="text-right">1.300</td>
-                            <td class="text-right">20.43%</td>
+                            <td className="text-right">1.300</td>
+                            <td className="text-right">20.43%</td>
                           </tr>
                           <tr>
                             <td>
-                              <div class="flag">
+                              <div className="flag">
                                 <img alt="..." src=""/>
                               </div>
                             </td>
                             <td>Murang'a county</td>
-                            <td class="text-right">760</td>
-                            <td class="text-right">10.35%</td>
+                            <td className="text-right">760</td>
+                            <td className="text-right">10.35%</td>
                           </tr>
                           <tr>
                             <td>
-                              <div class="flag">
+                              <div className="flag">
                                 <img alt="..." src=""/>
                               </div>
                             </td>
                             <td>Migori county</td>
-                            <td class="text-right">690</td>
-                            <td class="text-right">7.87%</td>
+                            <td className="text-right">690</td>
+                            <td className="text-right">7.87%</td>
                           </tr>
                           <tr>
                             <td>
-                              <div class="flag">
+                              <div className="flag">
                                 <img alt="..." src=""/>
                               </div>
                             </td>
                             <td>Mombasa county</td>
-                            <td class="text-right">600</td>
-                            <td class="text-right">5.94%</td>
+                            <td className="text-right">600</td>
+                            <td className="text-right">5.94%</td>
                           </tr>
                           <tr>
                             <td>
-                              <div class="flag">
+                              <div className="flag">
                                 <img alt="..." src=""/>
                               </div>
                             </td>
                             <td>Meru county</td>
-                            <td class="text-right">550</td>
-                            <td class="text-right">4.34%</td>
+                            <td className="text-right">550</td>
+                            <td className="text-right">4.34%</td>
                           </tr>
                         </tbody>
                       </table>
-                        <div class="ps__rail-x" style={{left: "0px; bottom: 0px;"}}>
-                          <div class="ps__thumb-x" tabindex="0" style={{left: "0px; width: 0px;"}}></div>
+                        <div className="ps__rail-x" style={{left: "0px; bottom: 0px;"}}>
+                          <div className="ps__thumb-x" tabindex="0" style={{left: "0px; width: 0px;"}}></div>
                         </div>
-                        <div class="ps__rail-y" style={{top: "0px; right: 0px;"}}>
-                          <div class="ps__thumb-y" tabindex="0" style={{top: "0px; height: 0px;"}}></div>
+                        <div className="ps__rail-y" style={{top: "0px; right: 0px;"}}>
+                          <div className="ps__thumb-y" tabindex="0" style={{top: "0px; height: 0px;"}}></div>
                         </div>
                         </div>
                         </div>
-                        <div class="ml-auto mr-auto col-md-6">
+                        <div className="ml-auto mr-auto col-md-6">
                           <div style={{width: "100%; height: 300px;"}}>
-                            <div class="jvectormap-container" style={{backgroundColor: "transparent;"}}>
+                            <div className="jvectormap-container" style={{backgroundColor: "transparent;"}}>
                               
                               <SVGMap map={KenyaMap} />
                               
