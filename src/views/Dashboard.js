@@ -446,7 +446,9 @@ setTopicProgress(progressData);
               </CardHeader>
               <CardBody>
                 <div>
+                
                 <OccupationLineGraph members={members} />
+                
                 </div>
               </CardBody>
             </Card>
@@ -744,25 +746,25 @@ setTopicProgress(progressData);
                           </tr>
                         </tbody>
                       </table>
-                        <div className="ps__rail-x" style={{left: "0px; bottom: 0px;"}}>
-                          <div className="ps__thumb-x" tabindex="0" style={{left: "0px; width: 0px;"}}></div>
+                        <div className="ps__rail-x" style={{left:"0px; bottom: 0px"}}>
+                          <div className="ps__thumb-x" tabIndex="0" style={{left: "0px; width: 0px"}}></div>
                         </div>
-                        <div className="ps__rail-y" style={{top: "0px; right: 0px;"}}>
-                          <div className="ps__thumb-y" tabindex="0" style={{top: "0px; height: 0px;"}}></div>
+                        <div className="ps__rail-y" style={{top: "0px; right: 0px"}}>
+                          <div className="ps__thumb-y" tabIndex="0" style={{top: "0px; height: 0px"}}></div>
                         </div>
                         </div>
                         </div>
                         <div className="ml-auto mr-auto col-md-6">
-                          <div style={{width: "100%; height: 300px;"}}>
-                            <div className="jvectormap-container" style={{backgroundColor: "transparent;"}}>
+                          <div style={{width: "100%; height: 300px"}}>
+                            <div className="jvectormap-container" style={{backgroundColor: "transparent"}}>
                               
                               <SVGMap map={KenyaMap} />
                               
-                              <div class="jvectormap-zoomin">+</div>
-                              <div class="jvectormap-zoomout">−</div>
-                              <div class="jvectormap-legend-cnt jvectormap-legend-cnt-h">
+                              <div className="jvectormap-zoomin">+</div>
+                              <div className="jvectormap-zoomout">−</div>
+                              <div className="jvectormap-legend-cnt jvectormap-legend-cnt-h">
                               </div>
-                              <div class="jvectormap-legend-cnt jvectormap-legend-cnt-v">
+                              <div className="jvectormap-legend-cnt jvectormap-legend-cnt-v">
                               </div>
                               </div>
                               </div>

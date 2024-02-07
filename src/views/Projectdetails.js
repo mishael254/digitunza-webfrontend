@@ -5,11 +5,13 @@ import { useParams } from "react-router-dom";
 import { Card, CardHeader, CardBody, Table, Row, Col, CardTitle } from "reactstrap";
 import Api from "./Api";
 import Skeleton from "react-loading-skeleton";
-
+import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
 function ProjectDetails() {
   const { projectName } = useParams();
   const { isLoading, statLogs } = Api();
-
+  const value1 = 0.16;
+  const value2 = 0.66;
   if (isLoading) {
     return (
       <div className="content">
@@ -82,6 +84,37 @@ function ProjectDetails() {
                 </Table>
               </CardBody>
             </Card>
+          </Col>
+          {/**testing react progressbars  */}
+          <Col md="6">
+            <div>
+              <CircularProgressbar value={value1} maxValue={1} text={`${value1 * 100}%`}
+              styles={buildStyles({
+                pathTransitionDuration: 0.5,
+                pathColor: `rgba(62, 152, 199, ${value1 * 100})`,
+                textColor: '#f88',
+                trailColor: '#d6d6d6',
+                backgroundColor: '#3e98c7',
+                rotation: 0.25,
+              })}
+             />;
+            </div> 
+          </Col>
+          <Col md="6">
+            <div>
+              <CircularProgressbar value={value2} maxValue={1} text={`${value2 * 100}%`}
+               styles={buildStyles({
+                pathTransitionDuration: 0.5,
+                pathColor: `rgba(62, 152, 199, ${value2 * 100})`,
+                textColor: '#f88',
+                trailColor: '#d6d6d6',
+                backgroundColor: '#3e98c7',
+                rotation: 0.25,
+                width: 200, 
+                height: 200
+              })}
+              />;
+            </div> 
           </Col>
         </Row>
       </div>
