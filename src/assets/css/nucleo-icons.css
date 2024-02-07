@@ -684,3 +684,23 @@ Created using IcoMoon - icomoon.io
   line-height: 20px;
   padding-left: 3px
 }
+.kenyaSvg{
+  width: auto;
+  height: auto;
+  stroke: #666;
+  stroke-width: 1;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.location{
+  fill: #344675;
+  cursor: pointer;
+}
+
+.location:focus,.location:hover{
+  fill: #e44cc4;
+  outline: 0;
+}
+.location[aria-checked=true]{
+  fill: #ee9090;
+}

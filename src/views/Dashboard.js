@@ -14,6 +14,7 @@ import MembersAgeGraph from "variables/MembersAgeGraph";
 import MembersCountiesGraph from "variables/MembersCountiesGraph";
 import KenyaMap from '@svg-maps/kenya';
 import { SVGMap } from "react-svg-map";
+//import 'react-svg-map/lib/index.css'
 // reactstrap components
 import {
   Button,
@@ -758,7 +759,7 @@ setTopicProgress(progressData);
                           <div style={{width: "100%; height: 300px"}}>
                             <div className="jvectormap-container" style={{backgroundColor: "transparent"}}>
                               
-                              <SVGMap map={KenyaMap} />
+                              <SVGMap locationClassName="location" className = "kenyaSvg" map={KenyaMap} />
                               
                               <div className="jvectormap-zoomin">+</div>
                               <div className="jvectormap-zoomout">−</div>
