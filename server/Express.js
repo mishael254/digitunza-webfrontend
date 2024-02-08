@@ -354,14 +354,17 @@ async function updateMembersTableWithAddress() {
       // Get county and locality from Geocoding API
       const { county, locality } = await getAddressFromGeocodingAPI(latitude, longitude);
 
-      // Update members table with county and locality
-      const updateQuery = `
-        UPDATE members
-        SET county = $1, locality = $2
-        WHERE id = $3;
-      `;
+      // Check if county and locality are available
+      if (county !== null && locality !== null) {
+        // Update members table with county and locality
+        const updateQuery = `
+          UPDATE members
+          SET county = $1, locality = $2
+          WHERE id = $3;
+        `;
 
-      await db.none(updateQuery, [county, locality, member.id]);
+        await db.none(updateQuery, [county, locality, member.id]);
+      }
     }
 
     console.log('Members table updated with county and locality.');
@@ -369,7 +372,6 @@ async function updateMembersTableWithAddress() {
     console.error('Error updating members table with address:', error);
   }
 }
-
 
 // Function to update statlogs table with presencounty and presentlocality
 async function updateStatlogsTableWithAddress() {
@@ -388,17 +390,18 @@ async function updateStatlogsTableWithAddress() {
 
       // Get presencounty and presentlocality from Geocoding API
       const { county, locality } = await getAddressFromGeocodingAPI(latitude, longitude);
+      // Check if county and locality are available
+      if (county !== null && locality !== null) {
+        // Update statlogs table with presencounty and presentlocality
+        const updateQuery = `
+          UPDATE statlogs
+          SET presentcounty = $1, presentlocality = $2
+          WHERE id = $3;
+        `;
 
-      // Update statlogs table with presencounty and presentlocality
-      const updateQuery = `
-        UPDATE statlogs
-        SET presentcounty = $1, presentlocality = $2
-        WHERE id = $3;
-      `;
-
-      await db.none(updateQuery, [county, locality, statlog.id]);
+        await db.none(updateQuery, [county, locality, statlog.id]);
+      }
     }
-
     console.log('Statlogs table updated with presentcounty and presentlocality.');
   } catch (error) {
     console.error('Error updating statlogs table with address:', error);
