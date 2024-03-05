@@ -12,6 +12,7 @@ import DeploymentLineGraph from "variables/DeploymentsGraph";
 import MembersProjectsGraph from "variables/MembersProjectGraph";
 import MembersAgeGraph from "variables/MembersAgeGraph";
 import MembersCountiesGraph from "variables/MembersCountiesGraph";
+import CountiesByStatlog from "variables/svgsdata/CountiesbyStatlog";
 import KenyaMap from '@svg-maps/kenya';
 import { SVGMap } from "react-svg-map";
 //import 'react-svg-map/lib/index.css'
@@ -683,70 +684,7 @@ setTopicProgress(progressData);
                 <div className="row">
                   <div className="col-md-6">
                     <div className="table-responsive ps">
-                      <table className="table">
-                        <tbody>
-                          <tr>
-                            <td>
-                              <div className="flag">
-                                <img alt="..." src=""/>
-                              </div>
-                            </td>
-                            <td>Nandi County</td>
-                            <td className="text-right">2.920</td>
-                            <td className="text-right">53.23%</td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <div className="flag">
-                                <img alt="..." src=""/>
-                              </div>
-                            </td>
-                            <td>Nyeri county</td>
-                            <td className="text-right">1.300</td>
-                            <td className="text-right">20.43%</td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <div className="flag">
-                                <img alt="..." src=""/>
-                              </div>
-                            </td>
-                            <td>Murang'a county</td>
-                            <td className="text-right">760</td>
-                            <td className="text-right">10.35%</td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <div className="flag">
-                                <img alt="..." src=""/>
-                              </div>
-                            </td>
-                            <td>Migori county</td>
-                            <td className="text-right">690</td>
-                            <td className="text-right">7.87%</td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <div className="flag">
-                                <img alt="..." src=""/>
-                              </div>
-                            </td>
-                            <td>Mombasa county</td>
-                            <td className="text-right">600</td>
-                            <td className="text-right">5.94%</td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <div className="flag">
-                                <img alt="..." src=""/>
-                              </div>
-                            </td>
-                            <td>Meru county</td>
-                            <td className="text-right">550</td>
-                            <td className="text-right">4.34%</td>
-                          </tr>
-                        </tbody>
-                      </table>
+                      <CountiesByStatlog statlogs={statLogs}/>
                         <div className="ps__rail-x" style={{left:"0px; bottom: 0px"}}>
                           <div className="ps__thumb-x" tabIndex="0" style={{left: "0px; width: 0px"}}></div>
                         </div>
