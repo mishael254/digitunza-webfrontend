@@ -56,9 +56,19 @@ const CountiesByStatlog = ({ statlogs }) => {
                 <img alt="..." src="" />
               </div>
             </td>
-            <td>{data.county}</td>
-            <td className="text-right">{/* Number of projects in this county */}</td>
-            <td className="text-right">{`${data.percentage}%`}</td>
+            <td >{data.county}</td>
+            
+            <td >{`${data.percentage}%`}</td>
+            <td>
+              {/* List of projects in this county */}
+              <ul>
+                {statlogs
+                  .filter(statlog => statlog.presentcounty === data.county)
+                  .map((project, projectIndex) => (
+                    <li key={projectIndex}>{project.project}</li>
+                  ))}
+              </ul>
+            </td>
           </tr>
         ))}
       </tbody>
