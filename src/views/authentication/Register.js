@@ -20,7 +20,7 @@ import {
 
 // core components
 import DemoNavbar from "components/Navbars/DemoNavbar.js";
-import SimpleFooter from "components/Footers/SimpleFooter.js";
+import SimpleFooter from "components/Footer/SimpleFooter";
 
 class Register extends React.Component {
   componentDidMount() {

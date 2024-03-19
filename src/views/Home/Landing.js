@@ -21,7 +21,7 @@ import {
 
 // core components
 import DemoNavbar from "components/Navbars/DemoNavbar.js";
-import CardsFooter from "components/Footers/CardsFooter.js";
+import CardsFooter from "components/Footer/CardsFooter.js";
 
 // index page sections
 import Download from "../IndexSections/Download.js";
