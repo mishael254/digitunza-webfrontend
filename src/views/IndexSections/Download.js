@@ -70,7 +70,7 @@ class Download extends React.Component {
                         />
                       </a>
                       <UncontrolledTooltip delay={0} target="tooltip255035741">
-                        Bootstrap 4 - Most popular front-end component library
+                      The United Nations Children's Fund (UNICEF)
                       </UncontrolledTooltip>
                     </Col>
                     <Col lg="2" xs="4">
@@ -86,7 +86,7 @@ class Download extends React.Component {
                         />
                       </a>
                       <UncontrolledTooltip delay={0} target="tooltip265846671">
-                        Vue.js - The progressive javascript framework
+                        The United Nations
                       </UncontrolledTooltip>
                     </Col>
                     <Col lg="2" xs="4">
@@ -102,7 +102,7 @@ class Download extends React.Component {
                         />
                       </a>
                       <UncontrolledTooltip delay={0} target="tooltip233150499">
-                        Angular - One framework. Mobile & Desktop
+                      Centre for Behaviour Change and Communication (CBCC)
                       </UncontrolledTooltip>
                     </Col>
                     <Col lg="2" xs="4">
@@ -118,8 +118,7 @@ class Download extends React.Component {
                         />
                       </a>
                       <UncontrolledTooltip delay={0} target="tooltip308866163">
-                        React - A JavaScript library for building user
-                        interfaces
+                      Social and Behaviour Change (SBC) solutions 
                       </UncontrolledTooltip>
                     </Col>
                     <Col lg="2" xs="4">
@@ -135,7 +134,7 @@ class Download extends React.Component {
                         />
                       </a>
                       <UncontrolledTooltip delay={0} target="tooltip76119384">
-                        Sketch - Digital design toolkit
+                      The African Medical and Research Foundation (AMREF)
                       </UncontrolledTooltip>
                     </Col>
                     <Col lg="2" xs="4">
@@ -151,8 +150,7 @@ class Download extends React.Component {
                         />
                       </a>
                       <UncontrolledTooltip delay={0} target="tooltip646643508">
-                        Adobe Photoshop - Software for digital images
-                        manipulation
+                      The United States Agency for International Development (USAID)
                       </UncontrolledTooltip>
                     </Col>
                   </Row>
