@@ -114,8 +114,7 @@ class DemoNavbar extends React.Component {
                               Getting started
                             </h6>
                             <p className="description d-none d-md-inline-block mb-0">
-                              Learn how to use Argon compiling Scss, change
-                              brand colors and more.
+                              Learn how to use and familiarize digitunza app more.
                             </p>
                           </Media>
                         </Media>
@@ -132,8 +131,8 @@ class DemoNavbar extends React.Component {
                               Foundation
                             </h6>
                             <p className="description d-none d-md-inline-block mb-0">
-                              Learn more about colors, typography, icons and the
-                              grid system we used for Argon.
+                              Learn more about content typography,and the
+                              grid system we use in digitunza.
                             </p>
                           </Media>
                         </Media>
@@ -147,11 +146,10 @@ class DemoNavbar extends React.Component {
                           </div>
                           <Media body className="ml-3">
                             <h5 className="heading text-warning mb-md-1">
-                              Components
+                              Support group
                             </h5>
                             <p className="description d-none d-md-inline-block mb-0">
-                              Browse our 50 beautiful handcrafted components
-                              offered in the Free version.
+                              Get to know the team behind the digitunza app
                             </p>
                           </Media>
                         </Media>
