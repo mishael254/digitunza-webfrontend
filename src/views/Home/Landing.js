@@ -1,4 +1,8 @@
-import React from "react";
+import "assets/vendor/nucleo/css/nucleo.css";
+import "assets/vendor/font-awesome/css/font-awesome.min.css";
+import "assets/scss/argon-design-system-react.scss?v1.1.0";
+
+import React, {useRef, useState, useEffect} from "react";
 // nodejs library that concatenates classes
 import classnames from "classnames";
 
@@ -26,18 +30,25 @@ import CardsFooter from "components/Footer/CardsFooter.js";
 // index page sections
 import Download from "../IndexSections/Download.js";
 
-class Landing extends React.Component {
-  state = {};
-  componentDidMount() {
-    document.documentElement.scrollTop = 0;
-    document.scrollingElement.scrollTop = 0;
-    this.refs.main.scrollTop = 0;
-  }
-  render() {
-    return (
+function Landing () {
+  const [nameFocused, setNameFocused] = useState(false);
+  const [emailFocused, setEmailFocused] = useState(false);
+
+  const nameInputRef = useRef(null);
+  const emailInputRef = useRef(null);
+  const mainRef = useRef(null);
+
+  useEffect(() => {
+    if (mainRef.current) {
+      mainRef.current.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
+      document.scrollingElement.scrollTop = 0;
+    }
+  }, []);
+  return (
       <>
         <DemoNavbar />
-        <main ref="main">
+        <main ref={mainRef}>
           <div className="position-relative">
             {/* shape Hero */}
             <section className="section section-lg section-shaped pb-250">
@@ -57,13 +68,15 @@ class Landing extends React.Component {
                   <Row>
                     <Col lg="6">
                       <h1 className="display-3 text-white">
-                        A beautiful Design System{" "}
-                        <span>completed with examples</span>
+                        Digitunza Learning System{" "}
+                        <span>Explore, Learn and Listen</span>
                       </h1>
                       <p className="lead text-white">
-                        The design system comes with four pre-built pages to
-                        help you get started faster. You can change the text and
-                        images and you're good to go.
+                        Unlock a world of Knowledge and inspiration with digitunza, the ultimate
+                        talking book app that is designed to enlighten and engage curious minds like yours.
+                        Whether you are passionate about agriculture, health, self-improvement, or simply love to Learn
+                         .our app has something for everyone.
+                         Designed specifically for individuals across Africa, our app is here to address common issues and equip you with the insights and resources you need to thrive.
                       </p>
                       <div className="btn-wrapper">
                         <Button
@@ -74,7 +87,7 @@ class Landing extends React.Component {
                           <span className="btn-inner--icon mr-1">
                             <i className="fa fa-code" />
                           </span>
-                          <span className="btn-inner--text">Components</span>
+                          <span className="btn-inner--text">Learn more</span>
                         </Button>
                         <Button
                           className="btn-white btn-icon mb-3 mb-sm-0 ml-1"
@@ -85,7 +98,7 @@ class Landing extends React.Component {
                             <i className="ni ni-cloud-download-95" />
                           </span>
                           <span className="btn-inner--text">
-                            Download React
+                            Download Digitunza
                           </span>
                         </Button>
                       </div>
@@ -124,12 +137,11 @@ class Landing extends React.Component {
                             <i className="ni ni-check-bold" />
                           </div>
                           <h6 className="text-primary text-uppercase">
-                            Download Argon
+                          Interactive and Engaging Content:
                           </h6>
                           <p className="description mt-3">
-                            Argon is a great free UI package based on Bootstrap
-                            4 that includes the most important components and
-                            features.
+                           Immerse yourself in captivating narratives, expert
+                           insights, and thought-provoking discussions. Our digital book format brings topics to life, making learning an enjoyable and enriching experience
                           </p>
                           <div>
                             <Badge color="primary" pill className="mr-1">
@@ -160,12 +172,11 @@ class Landing extends React.Component {
                             <i className="ni ni-istanbul" />
                           </div>
                           <h6 className="text-success text-uppercase">
-                            Build Something
+                          Tailored Learning Experience:
                           </h6>
                           <p className="description mt-3">
-                            Argon is a great free UI package based on Bootstrap
-                            4 that includes the most important components and
-                            features.
+                          Dive into a diverse library of topics, handpicked to cater to your interests and
+                          preferences. From ancient civilizations to cutting-edge technology, our curated collection ensures there's always something new to discover.
                           </p>
                           <div>
                             <Badge color="success" pill className="mr-1">
@@ -196,12 +207,11 @@ class Landing extends React.Component {
                             <i className="ni ni-planet" />
                           </div>
                           <h6 className="text-warning text-uppercase">
-                            Prepare Launch
+                          Personalized Recommendations:
                           </h6>
                           <p className="description mt-3">
-                            Argon is a great free UI package based on Bootstrap
-                            4 that includes the most important components and
-                            features.
+                          Let our smart recommendation engine guide your journey. Based on your listening habits and feedback, we'll suggest content that aligns perfectly with your interests, 
+                          ensuring every session is both relevant and rewarding.
                           </p>
                           <div>
                             <Badge color="warning" pill className="mr-1">
@@ -247,8 +257,8 @@ class Landing extends React.Component {
                     </div>
                     <h3>Awesome features</h3>
                     <p>
-                      The kit comes with three pre-built pages to help you get
-                      started faster. You can change the text and images and
+                      The app comes with three pre-built content to help you get
+                      started faster. You just need to sign up for a project and 
                       you're good to go.
                     </p>
                     <ul className="list-unstyled mt-5">
@@ -264,7 +274,7 @@ class Landing extends React.Component {
                           </div>
                           <div>
                             <h6 className="mb-0">
-                              Carefully crafted components
+                              Carefully crafted learning kits
                             </h6>
                           </div>
                         </div>
@@ -280,7 +290,7 @@ class Landing extends React.Component {
                             </Badge>
                           </div>
                           <div>
-                            <h6 className="mb-0">Amazing page examples</h6>
+                            <h6 className="mb-0">Amazing audio and video quality examples</h6>
                           </div>
                         </div>
                       </li>
@@ -296,7 +306,7 @@ class Landing extends React.Component {
                           </div>
                           <div>
                             <h6 className="mb-0">
-                              Super friendly support team
+                              Super friendly UI & UX
                             </h6>
                           </div>
                         </div>
@@ -338,9 +348,8 @@ class Landing extends React.Component {
                         Design System
                       </h4>
                       <p className="lead text-italic text-white">
-                        The Arctic Ocean freezes every winter and much of the
-                        sea-ice then thaws every summer, and that process will
-                        continue whatever happens.
+                      Experience smooth performance and lightning-fast loading times, Whether you're online or offline,
+                      digitunza delivers a consistently smooth and responsive experience.
                       </p>
                     </blockquote>
                   </Card>
@@ -350,28 +359,25 @@ class Landing extends React.Component {
                     <div className="icon icon-lg icon-shape icon-shape-warning shadow rounded-circle mb-5">
                       <i className="ni ni-settings" />
                     </div>
-                    <h3>Our customers</h3>
+                    <h3>Our Perspectives</h3>
                     <p className="lead">
-                      Don't let your uses guess by attaching tooltips and
-                      popoves to any element. Just make sure you enable them
-                      first via JavaScript.
+                    We explore a diverse range of view points and solutions presented by experts, thought leaders, and community members.
+                    Diving deep into the issues affecting Africa, offering fresh insights and innovative strategies for positive change.
                     </p>
                     <p>
-                      The kit comes with three pre-built pages to help you get
-                      started faster. You can change the text and images and
-                      you're good to go.
+                    Gain practical knowledge and actionable advice on vital topics such as hygiene practices, sustainable agriculture, healthcare essentials,
+                    and cultural awareness. Our content is tailored to address real-world challenges faced by individuals and communities across Africa.
                     </p>
                     <p>
-                      The kit comes with three pre-built pages to help you get
-                      started faster. You can change the text and images and
-                      you're good to go.
+                    
+                    
                     </p>
                     <a
                       className="font-weight-bold text-warning mt-5"
                       href="#pablo"
                       onClick={(e) => e.preventDefault()}
                     >
-                      A beautiful UI Kit for impactful websites
+                      explore more..
                     </a>
                   </div>
                 </Col>
@@ -386,7 +392,7 @@ class Landing extends React.Component {
                     <img
                       alt="..."
                       className="img-center img-fluid"
-                      src={require("assets/img/ill/ill-2.svg")}
+                      src={require("assets/img/ill/mouse.png")}
                     />
                   </div>
                 </Col>
@@ -400,9 +406,7 @@ class Landing extends React.Component {
                     <div className="pl-4">
                       <h4 className="display-3 text-white">Modern Interface</h4>
                       <p className="text-white">
-                        The Arctic Ocean freezes every winter and much of the
-                        sea-ice then thaws every summer, and that process will
-                        continue whatever.
+                      Experience the difference that thoughtful design can make in your learning journey. Discover a world of knowledge, beautifully designed for you.
                       </p>
                     </div>
                   </div>
@@ -416,12 +420,12 @@ class Landing extends React.Component {
                         </div>
                         <div className="pl-4">
                           <h5 className="title text-success">
-                            Awesome Support
+                            User-Centric Interface
                           </h5>
                           <p>
-                            The Arctic Ocean freezes every winter and much of
-                            the sea-ice then thaws every summer, and that
-                            process will continue whatever.
+                          Navigate effortlessly through our app's intuitive interface, 
+                          thoughtfully designed to prioritize ease of use and accessibility. 
+                          From first-time users to seasoned learners, everyone can engage with our content with confidence.
                           </p>
                           <a
                             className="text-success"
@@ -444,12 +448,12 @@ class Landing extends React.Component {
                         </div>
                         <div className="pl-4">
                           <h5 className="title text-warning">
-                            Modular Components
+                            Visual Cohesion
                           </h5>
                           <p>
-                            The Arctic Ocean freezes every winter and much of
-                            the sea-ice then thaws every summer, and that
-                            process will continue whatever.
+                          Immerse yourself in a visually cohesive environment that enhances readability and engagement.
+                          Our design system ensures consistency across every screen and interaction, 
+                          creating a seamless journey from discovery to enlightenment.
                           </p>
                           <a
                             className="text-warning"
@@ -675,12 +679,11 @@ class Landing extends React.Component {
                   <Row className="align-items-center">
                     <Col lg="8">
                       <h3 className="text-white">
-                        We made website building easier for you.
+                        Ready to Dive In? 
                       </h3>
                       <p className="lead text-white mt-3">
-                        I will be the leader of a company that ends up being
-                        worth billions of dollars, because I got the answers. I
-                        understand culture.
+                      Don't miss out on the opportunity to broaden your knowledge and spark your curiosity. Download Digitunza today and embark on a journey of lifelong learning and discovery.
+                      Let's explore the world together—one chapter at a time.
                       </p>
                     </Col>
                     <Col className="ml-lg-auto" lg="3">
@@ -691,7 +694,7 @@ class Landing extends React.Component {
                         href="https://www.creative-tim.com/product/argon-design-system-react?ref=adsr-landing-page"
                         size="lg"
                       >
-                        Download React
+                        Download
                       </Button>
                     </Col>
                   </Row>
@@ -703,12 +706,10 @@ class Landing extends React.Component {
             <Container className="pt-lg pb-300">
               <Row className="text-center justify-content-center">
                 <Col lg="10">
-                  <h2 className="display-3 text-white">Build something</h2>
+                  <h2 className="display-3 text-white">Join the Movement for Change</h2>
                   <p className="lead text-white">
-                    According to the National Oceanic and Atmospheric
-                    Administration, Ted, Scambos, NSIDClead scentist, puts the
-                    potentially record low maximum sea ice extent tihs year down
-                    to low ice.
+                  Together, we can overcome challenges, break barriers, and build a brighter future for Africa. Download digitunza today and embark on a journey of learning, growth, and transformation. 
+                  Let's harness the power of knowledge to shape a better tomorrow—for ourselves and generations to come.
                   </p>
                 </Col>
               </Row>
@@ -717,30 +718,30 @@ class Landing extends React.Component {
                   <div className="icon icon-lg icon-shape bg-gradient-white shadow rounded-circle text-primary">
                     <i className="ni ni-settings text-primary" />
                   </div>
-                  <h5 className="text-white mt-3">Building tools</h5>
+                  <h5 className="text-white mt-3">Unlocking Agricultural Insights</h5>
                   <p className="text-white mt-3">
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
+                  Whether you're a smallholder farmer or an aspiring agripreneur, 
+                  our app offers valuable insights into sustainable farming practices, market trends, and innovations in agriculture, helping you unlock the full potential of your land and resources.
                   </p>
                 </Col>
                 <Col lg="4">
                   <div className="icon icon-lg icon-shape bg-gradient-white shadow rounded-circle text-primary">
                     <i className="ni ni-ruler-pencil text-primary" />
                   </div>
-                  <h5 className="text-white mt-3">Grow your market</h5>
+                  <h5 className="text-white mt-3">Challenging Harmful Traditions</h5>
                   <p className="text-white mt-3">
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
+                  While traditions enrich our cultural heritage, some practices may hinder progress and well-being.
+                  Digitunza addresses taboo topics and challenges harmful cultural rituals, promoting dialogue and empowerment within communities to embrace positive change.
                   </p>
                 </Col>
                 <Col lg="4">
                   <div className="icon icon-lg icon-shape bg-gradient-white shadow rounded-circle text-primary">
                     <i className="ni ni-atom text-primary" />
                   </div>
-                  <h5 className="text-white mt-3">Launch time</h5>
+                  <h5 className="text-white mt-3">Promoting Healthy Practices</h5>
                   <p className="text-white mt-3">
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
+                  Hygiene, nutrition, disease prevention these are not just topics; they are the building blocks of a healthy
+                  and prosperous future. Through engaging audio content, digitunza educates and empowers you to adopt healthier habits and safeguard the well-being of yourself and your loved ones.
                   </p>
                 </Col>
               </Row>
@@ -768,13 +769,13 @@ class Landing extends React.Component {
                 <Col lg="8">
                   <Card className="bg-gradient-secondary shadow">
                     <CardBody className="p-lg-5">
-                      <h4 className="mb-1">Want to work with us?</h4>
+                      <h4 className="mb-1">Want to reach out to us?</h4>
                       <p className="mt-0">
-                        Your project is very important to us.
+                        Your feedback is very important to us.
                       </p>
                       <FormGroup
                         className={classnames("mt-5", {
-                          focused: this.state.nameFocused,
+                          focused: nameFocused,
                         })}
                       >
                         <InputGroup className="input-group-alternative">
@@ -784,20 +785,21 @@ class Landing extends React.Component {
                             </InputGroupText>
                           </InputGroupAddon>
                           <Input
+                            ref={nameInputRef}
                             placeholder="Your name"
                             type="text"
-                            onFocus={(e) =>
-                              this.setState({ nameFocused: true })
+                            onFocus={() =>
+                              setNameFocused(true)
                             }
-                            onBlur={(e) =>
-                              this.setState({ nameFocused: false })
+                            onBlur={() =>
+                              setNameFocused(false)
                             }
                           />
                         </InputGroup>
                       </FormGroup>
                       <FormGroup
                         className={classnames({
-                          focused: this.state.emailFocused,
+                          focused: emailFocused,
                         })}
                       >
                         <InputGroup className="input-group-alternative">
@@ -807,13 +809,14 @@ class Landing extends React.Component {
                             </InputGroupText>
                           </InputGroupAddon>
                           <Input
+                            ref={emailInputRef}
                             placeholder="Email address"
                             type="email"
-                            onFocus={(e) =>
-                              this.setState({ emailFocused: true })
+                            onFocus={() =>
+                              setEmailFocused(true)
                             }
-                            onBlur={(e) =>
-                              this.setState({ emailFocused: false })
+                            onBlur={() =>
+                              setEmailFocused(false)
                             }
                           />
                         </InputGroup>
@@ -851,6 +854,6 @@ class Landing extends React.Component {
       </>
     );
   }
-}
+
 
 export default Landing;

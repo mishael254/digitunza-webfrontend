@@ -1,5 +1,8 @@
+import "assets/vendor/nucleo/css/nucleo.css";
+import "assets/vendor/font-awesome/css/font-awesome.min.css";
+import "assets/scss/argon-design-system-react.scss?v1.1.0";
 
-import React from "react";
+import React, {useRef, useEffect}from "react";
 
 // reactstrap components
 import {
@@ -22,17 +25,21 @@ import {
 import DemoNavbar from "components/Navbars/DemoNavbar.js";
 import SimpleFooter from "components/Footer/SimpleFooter";
 
-class Signin extends React.Component {
-  componentDidMount() {
-    document.documentElement.scrollTop = 0;
-    document.scrollingElement.scrollTop = 0;
-    this.refs.main.scrollTop = 0;
-  }
-  render() {
+function Signin (){
+
+  const mainRef = useRef(null);
+
+  useEffect(() => {
+    if (mainRef.current) {
+      mainRef.current.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
+      document.scrollingElement.scrollTop = 0;
+    }
+  }, []);
     return (
       <>
         <DemoNavbar />
-        <main ref="main">
+        <main ref={mainRef}>
           <section className="section section-shaped section-lg">
             <div className="shape shape-style-1 bg-gradient-default">
               <span />
@@ -172,6 +179,6 @@ class Signin extends React.Component {
       </>
     );
   }
-}
+
 
 export default Signin;

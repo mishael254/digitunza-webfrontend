@@ -4,6 +4,13 @@ import { Route, Routes, Navigate, useLocation } from "react-router-dom";
 // javascript plugin used to create scrollbars on windows
 import PerfectScrollbar from "perfect-scrollbar";
 
+// importing css to be used in the admin
+
+//import "assets/scss/black-dashboard-react.scss";
+//import "assets/demo/demo.css";
+//import "assets/css/nucleo-icons.css";
+//import "@fortawesome/fontawesome-free/css/all.min.css";
+
 // core components
 import AdminNavbar from "components/Navbars/AdminNavbar.js";
 import Footer from "components/Footer/Footer.js";

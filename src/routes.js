@@ -9,7 +9,6 @@ import Projects from "views/Projects";
 import Projectdetails from "views/Projectdetails";
 import Createproject from "views/Createproject";
 
-
 var routes = [
   {
     path: "/dashboard",
