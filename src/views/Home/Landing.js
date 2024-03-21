@@ -504,12 +504,12 @@ function Landing () {
                     <img
                       alt="..."
                       className="rounded-circle img-center img-fluid shadow shadow-lg--hover"
-                      src={require("assets/img/theme/BADILISHA-01.png")}
-                      style={{ width: "200px" }}
+                      src={require("assets/img/theme/tathmini.jpg")}
+                      style={{ width: "200px", height: "180px" }}
                     />
                     <div className="pt-4 text-center">
                       <h5 className="title">
-                        <span className="d-block mb-1">Badilisha team</span>
+                        <span className="d-block mb-1">tathmini team</span>
                         <small className="h6 text-muted">data analysts</small>
                       </h5>
                       <div className="mt-3">
@@ -546,14 +546,14 @@ function Landing () {
                     <img
                       alt="..."
                       className="rounded-circle img-center img-fluid shadow shadow-lg--hover"
-                      src={require("assets/img/theme/team-2-800x800.jpg")}
-                      style={{ width: "200px" }}
+                      src={require("assets/img/theme/badili.jpg")}
+                      style={{ width: "200px", height: "180px"}}
                     />
                     <div className="pt-4 text-center">
                       <h5 className="title">
-                        <span className="d-block mb-1">Romina Hadid</span>
+                        <span className="d-block mb-1">Badili</span>
                         <small className="h6 text-muted">
-                          Marketing Strategist
+                          Design team
                         </small>
                       </h5>
                       <div className="mt-3">
@@ -590,13 +590,13 @@ function Landing () {
                     <img
                       alt="..."
                       className="rounded-circle img-center img-fluid shadow shadow-lg--hover"
-                      src={require("assets/img/theme/team-3-800x800.jpg")}
-                      style={{ width: "200px" }}
+                      src={require("assets/img/theme/digisinema.jpg")}
+                      style={{ width: "200px", height: "180px" }}
                     />
                     <div className="pt-4 text-center">
                       <h5 className="title">
-                        <span className="d-block mb-1">Alexander Smith</span>
-                        <small className="h6 text-muted">UI/UX Designer</small>
+                        <span className="d-block mb-1">digisinema team</span>
+                        <small className="h6 text-muted">content creators</small>
                       </h5>
                       <div className="mt-3">
                         <Button
@@ -632,13 +632,13 @@ function Landing () {
                     <img
                       alt="..."
                       className="rounded-circle img-center img-fluid shadow shadow-lg--hover"
-                      src={require("assets/img/theme/team-4-800x800.jpg")}
-                      style={{ width: "200px" }}
+                      src={require("assets/img/theme/digiredio.jpg")}
+                      style={{ width: "200px", height: "180px" }}
                     />
                     <div className="pt-4 text-center">
                       <h5 className="title">
-                        <span className="d-block mb-1">John Doe</span>
-                        <small className="h6 text-muted">Founder and CEO</small>
+                        <span className="d-block mb-1">Digiredio team</span>
+                        <small className="h6 text-muted">audio content engineers</small>
                       </h5>
                       <div className="mt-3">
                         <Button
