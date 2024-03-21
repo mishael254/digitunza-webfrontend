@@ -492,9 +492,9 @@ function Landing () {
                 <Col lg="8">
                   <h2 className="display-3">The amazing Team</h2>
                   <p className="lead text-muted">
-                    According to the National Oceanic and Atmospheric
-                    Administration, Ted, Scambos, NSIDClead scentist, puts the
-                    potentially record maximum.
+                  At digitunza, we're more than just a team we're a passionate collective of visionaries dedicated to empowering
+                  Africa through knowledge and innovation. With diverse expertise and a shared commitment to excellence, our team works 
+                  tirelessly to bring you the best possible experience.
                   </p>
                 </Col>
               </Row>
