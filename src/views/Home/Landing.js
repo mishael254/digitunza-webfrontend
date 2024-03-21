@@ -504,13 +504,13 @@ function Landing () {
                     <img
                       alt="..."
                       className="rounded-circle img-center img-fluid shadow shadow-lg--hover"
-                      src={require("assets/img/theme/team-1-800x800.jpg")}
+                      src={require("assets/img/theme/BADILISHA-01.png")}
                       style={{ width: "200px" }}
                     />
                     <div className="pt-4 text-center">
                       <h5 className="title">
-                        <span className="d-block mb-1">Ryan Tompson</span>
-                        <small className="h6 text-muted">Web Developer</small>
+                        <span className="d-block mb-1">Badilisha team</span>
+                        <small className="h6 text-muted">data analysts</small>
                       </h5>
                       <div className="mt-3">
                         <Button
