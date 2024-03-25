@@ -740,7 +740,7 @@ function Landing () {
                   </div>
                   <h5 className="text-white mt-3">Promoting Healthy Practices</h5>
                   <p className="text-white mt-3">
-                  Hygiene, nutrition, disease prevention these are not just topics; they are the building blocks of a healthy
+                  Hygiene,nutrition, disease prevention these are not just topics; they are the building blocks of a healthy
                   and prosperous future. Through engaging audio content, digitunza educates and empowers you to adopt healthier habits and safeguard the well-being of yourself and your loved ones.
                   </p>
                 </Col>
